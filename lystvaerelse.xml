@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Herunder findes indholdet til rummenes menuer -->
+<rum>
+	<!-- Menuer i -->
+	<lystvaerelse>
+		<!-- ............................................................................................ -->
+		<!-- Menu om blog:-->
+		<menu titel="Brevkasse" startbillede="brevkasse.swf">
+			<position xpos="419" ypos="355"/>
+		</menu>
+		<!-- ............................................................................................ -->
+		<!-- Menu om brevkasse:-->
+		<menu titel="Stue" startbillede="stue.swf">
+			<position xpos="435" ypos="294"/>
+		</menu>
+		<!-- ............................................................................................ -->
+		<!-- Menu om debat:-->
+		<menu titel="Udenfor" startbillede="udenfor.swf">
+			<position xpos="0" ypos="300"/>
+		</menu>
+		<!-- ............................................................................................ -->
+		<!-- Menu om artikler:-->
+		<menu titel="Lovstue" startbillede="lovstue.swf">
+			<position xpos="241" ypos="195"/>
+		</menu>
+		<!-- ............................................................................................ -->
+		<!-- Menu om links:-->
+		<menu titel="It_vaerksted" startbillede="it_vaerksted.swf">
+			<position xpos="185" ypos="362"/>
+		</menu>
+		<!-- ............................................................................................ -->
+		<!-- Menu om Badevaerelse -->
+		<menu titel="Badevaerelse" startbillede="badevaerelse.swf">
+			<position xpos="348" ypos="180"/>
+		</menu>
+		<!-- ............................................................................................ -->
+	</lystvaerelse>
+</rum>
