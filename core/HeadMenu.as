@@ -52,6 +52,9 @@ package core
 		private var seneste:TextField;
 		private var ft:TextFormat;
 		private var baseurl:String;
+		private var mediabox_xml:String;
+		private var read_more_full_text:String;
+
 
 		
 		
@@ -91,7 +94,7 @@ package core
 		}
 		private function noXmlExcist(e:Event):void
 		{
-			
+			trace("there is no xml-file!");
 		}
 		private function createHead():void
 		{
@@ -138,8 +141,7 @@ package core
 				Tweener.addTween(flashMenuLinkbox, { x:mouseX, time:1 } );
 				Tweener.addTween(flashMenuLinkbox, { y:mouseY, time:1 } );
 				toRoom.text = "Til " + event.target.name;
-				seneste.text = "Seneste indlæg";
-
+				seneste.text = "Læs mere";
 				
 			}else {
 			// here the Hoverbox is defined
@@ -160,7 +162,7 @@ package core
 			
 			//the title of the fm item is passed to the node-link in the Hoverbox
 			toRoom.text = "Til " + event.target.name;
-			seneste.text = "Tjek indlæg";
+			seneste.text = "Læs mere";
 			flashMenuLinkbox.addEventListener(Event.ADDED_TO_STAGE, linkboxAddedToStage)
 			flashMenuLinkbox.tilvaerelset.addEventListener(MouseEvent.CLICK, tilvaerelsetHandler);
 			
@@ -178,11 +180,21 @@ package core
 			flashMenuLinkbox.senesteindlaeg.mouseChildren = false;
 			addChild(flashMenuLinkbox);
 			}
-
-			xmlob = new Xmlloader(baseurl + contentInfoObject.xmlObject..node[headarray.indexOf(linkboxId)].node_data_field_text_field_text + ".xml");
+			//we fetch the xml-feed with dynamic content for the Mediabox - if it is empty, we link to a descriptive text instead,
+			//stored in node_revisions_body
+			mediabox_xml = contentInfoObject.xmlObject..node[headarray.indexOf(linkboxId)].node_data_field_text_field_text;
+			
+			if (mediabox_xml == "") 
+			{
+				read_more_full_text = contentInfoObject.xmlObject..node[headarray.indexOf(linkboxId)].node_revisions_body;
+				//we add the a mouse listener to the Hoverbox
+				flashMenuLinkbox.senesteindlaeg.addEventListener(MouseEvent.CLICK, senesteindlaegHandler);
+				//trace(read_more_full_text);
+			} else {
+			xmlob = new Xmlloader(baseurl + mediabox_xml + ".xml");
 			xmlob.addEventListener(Xmlloader.XMLLOADED, xmlExcist);
 			xmlob.addEventListener(Xmlloader.NOXML, noXmlExcist);
-			
+			}
 		}
 		private function tilvaerelsetout(e:MouseEvent):void
 		{
@@ -226,14 +238,32 @@ package core
 			Tweener.addTween(newsboxHeadline, { x:100, time:1, onComplete:function() { Tweener.addTween(newsboxHeadline, { 
 				x:37, 
 				time:1} );}} );
-				
+					//there is no dynamic xml and we put the descriptive readmore text in the media box
+					
+					trace("heyy were in the senesteindlæghandler");
+					if (mediabox_xml == "") 
+					{
+					newsmedia.link1.alpha = 0;
+					newsmedia.link2.alpha = 0;
+					newsmedia.link3.alpha = 0;
+					newsmedia.link1.titletext.text = "";
+					newsmedia.link2.titletext.text = "";
+					newsmedia.link3.titletext.text = "";
+					newsmedia.readmore.readmoretext.text = read_more_full_text;
+					trace("heyy were in the senesteindlæghandler and xml = 0");
+					}
+					else 
+					{
 					newsmedia.link1.titletext.text = xmlob.xmlObject..node[0].node_title;
 					newsmedia.link2.titletext.text = xmlob.xmlObject..node[1].node_title;
 					newsmedia.link3.titletext.text = xmlob.xmlObject..node[2].node_title;
-					newsmedia.roomtext.newsheading.text = contentInfoObject.xmlObject..node[headarray.indexOf(linkboxId)].node_title;
 					newsmedia.link1.addEventListener(MouseEvent.CLICK, link1Handler);
 					newsmedia.link2.addEventListener(MouseEvent.CLICK, link2Handler);
 					newsmedia.link3.addEventListener(MouseEvent.CLICK, link3Handler);
+						
+					}
+					newsmedia.roomtext.newsheading.text = contentInfoObject.xmlObject..node[headarray.indexOf(linkboxId)].node_title;
+
 				
 				
 		}
