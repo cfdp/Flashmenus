@@ -103,11 +103,18 @@ package core
 			{
 				
 				container = new Sprite ();
+				//here the x and y-position of the fmswf is fetched
 				orgriny = contentInfoObject.xmlObject..node[i].node_data_field_text_field_swf_y;
 				orgrinx = contentInfoObject.xmlObject..node[i].node_data_field_text_field_swf_x;
 				container.x = orgrinx;
 				container.y = orgriny;
-				container.name = contentInfoObject.xmlObject..node[i].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet;
+				
+				//here the read-more-text is fetched - but how do we send it along to the containerClickHandler?
+				//do we need to write a custom event?
+				//somevar = contentInfoObject.xmlObject..node[i].node_data_field_text_field_fm_read_more;
+				
+				//here the title of the fm item is given to the container
+				container.name = contentInfoObject.xmlObject..node[i].node_title;
 				headarray.push(container.name);
 				swfContent = new Swfloader( baseurl + contentInfoObject.xmlObject..node[i].files_node_data_field_swffile_filepath);
 				container.buttonMode = true;
@@ -134,7 +141,8 @@ package core
 				seneste.text = "Seneste indlæg";
 
 				
-			}else{
+			}else {
+			// here the Hoverbox is defined
 			flashMenuLinkbox = new Linkbox();
 			ft = new TextFormat ();
 			ft.bold = false;
@@ -149,8 +157,10 @@ package core
 			seneste.defaultTextFormat = ft;
 			flashMenuLinkbox.x = mouseX;
 			flashMenuLinkbox.y = mouseY;
+			
+			//the title of the fm item is passed to the node-link in the Hoverbox
 			toRoom.text = "Til " + event.target.name;
-			seneste.text = "Seneste indæg";
+			seneste.text = "Tjek indlæg";
 			flashMenuLinkbox.addEventListener(Event.ADDED_TO_STAGE, linkboxAddedToStage)
 			flashMenuLinkbox.tilvaerelset.addEventListener(MouseEvent.CLICK, tilvaerelsetHandler);
 			
