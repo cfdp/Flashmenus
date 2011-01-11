@@ -52,10 +52,15 @@ package core
 		private var seneste:TextField;
 		private var ft:TextFormat;
 		private var baseurl:String;
+		private var til:String;
+		private var readmore:String;
+		private var titleArray:Array;
+		private var readmoreArray:Array;
+		private var xmlob2:Xmlloader;
 
 		
 		
-		
+		//constructor
 		public function HeadMenu()
 		{
 			xmlConnection();
@@ -72,14 +77,25 @@ package core
 			contentInfoObject.addEventListener(Xmlloader.XMLLOADED, contentInfoXmlLoaded);
 			contentInfoObject.addEventListener(Xmlloader.NOXML, contentInfoXmlNoXml);
 			
+			//url to xml that's loads the first text in mediabox.
+			var xmlcontent:String = baseurl+"fmblandet/alle";
+			xmlob2 = new Xmlloader(xmlcontent);
+			// vi recycle the functions from above
+			xmlob2.addEventListener(Xmlloader.NOXML, contentInfoXmlNoXml)
+			xmlob2.addEventListener(Xmlloader.XMLLOADED, contentInfoXmlLoaded);
+			
 
 		}
 		private function contentInfoXmlLoaded(e:Event):void
 		{
 			createHead();
+			trace(xmlob2.xmlObject);
+			//setting the default text
+			newsmedia.link1.titletext.text = xmlob2.xmlObject..node[0].node_title;
+			newsmedia.link2.titletext.text = xmlob2.xmlObject..node[1].node_title;
+			newsmedia.link3.titletext.text = xmlob2.xmlObject..node[2].node_title;
+			newsmedia.roomtext.newsheading.text = "Ungeblogs";
 			
-			
-
 		}
 		private function contentInfoXmlNoXml(e:Event):void
 		{
@@ -95,12 +111,19 @@ package core
 		}
 		private function createHead():void
 		{
-			
+
+			readmoreArray = new Array();
+			titleArray = new Array();
 			headarray = new Array();
 			var staticGlow:GlowFilter = new GlowFilter(0xfff300, 0.6, 5,5,3);
 			
 			for(var i:Number = 0; i <countMenuItems; i++)
 			{
+				til = contentInfoObject.xmlObject..node[i].node_title;
+				titleArray.push(til);
+				
+				readmore = contentInfoObject.xmlObject..node[i].node_data_field_text_field_fm_read_more;
+				readmoreArray.push(readmore);
 				
 				container = new Sprite ();
 				orgriny = contentInfoObject.xmlObject..node[i].node_data_field_text_field_swf_y;
@@ -130,8 +153,8 @@ package core
 			{
 				Tweener.addTween(flashMenuLinkbox, { x:mouseX, time:1 } );
 				Tweener.addTween(flashMenuLinkbox, { y:mouseY, time:1 } );
-				toRoom.text = "Til " + event.target.name;
-				seneste.text = "Seneste indlæg";
+				toRoom.text = "Til " + titleArray[headarray.indexOf(linkboxId)];
+				seneste.text = readmoreArray[headarray.indexOf(linkboxId)];
 
 				
 			}else{
@@ -149,9 +172,9 @@ package core
 			seneste.defaultTextFormat = ft;
 			flashMenuLinkbox.x = mouseX;
 			flashMenuLinkbox.y = mouseY;
-			toRoom.text = "Til " + event.target.name;
-			seneste.text = "Seneste indæg";
-			flashMenuLinkbox.addEventListener(Event.ADDED_TO_STAGE, linkboxAddedToStage)
+			toRoom.text = "Til "+ titleArray[headarray.indexOf(linkboxId)] ;
+			seneste.text = readmoreArray[headarray.indexOf(linkboxId)];
+			flashMenuLinkbox.addEventListener(Event.ADDED_TO_STAGE, linkboxAddedToStage);
 			flashMenuLinkbox.tilvaerelset.addEventListener(MouseEvent.CLICK, tilvaerelsetHandler);
 			
 			flashMenuLinkbox.tilvaerelset.buttonMode = true;
