@@ -13,6 +13,7 @@ package utilis.xml
     import flash.events.Event;
     import flash.events.EventDispatcher;
     import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
     import flash.net.URLLoader;
     import flash.net.URLRequest;
 
@@ -24,6 +25,7 @@ package utilis.xml
         // variabler kan ikke ændres men tilgåes
         public static const XMLLOADED:String = "xmldataloaded";
         public static const NOXML:String = "noxmlDataloaded";
+		public static const PROGRESS:String = "progressupdate";
         
 		
 		// hvordan den bruges, opret et nyt objekt af klassen:
@@ -34,6 +36,7 @@ package utilis.xml
             urlloader = new URLLoader(request);
             urlloader.addEventListener(Event.COMPLETE, completeHandler);
             urlloader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			urlloader.addEventListener(ProgressEvent.PROGRESS, progressHandler);
         }
         
         
@@ -51,6 +54,11 @@ package utilis.xml
                 dispatchEvent(new Event(NOXML));
             }
         }
+		//react to a progress event
+		private function progressHandler(e:Event):void
+		{
+			dispatchEvent(new Event(PROGRESS));
+		}
         
         // Klarer en IOError event.
         private function ioErrorHandler(event:IOErrorEvent):void {
