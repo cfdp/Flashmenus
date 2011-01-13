@@ -1,6 +1,7 @@
 package core 
 {
 	
+	import br.com.stimuli.loading.BulkLoader;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import utilis.loadcontent.Swfloader;
@@ -14,10 +15,12 @@ package core
 		private var dataObject:XML;
 		private var baseurl:String;
 		
+		
 		public function Fmswf(xmlobj:XML,burl:String) 
 		{
 			dataObject = xmlobj;
 			baseurl = burl;
+			
 			
 			//for loop for generating the fmswf's and placing them on stage
 			for (var i:Number = 0; i <countMenuItems; i++)

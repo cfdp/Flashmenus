@@ -20,6 +20,7 @@ package components.Mediabox_beta2
 		private var undertitle:TextField;
 		private var ungeblog:MovieClip;
 		private var starway:MovieClip;
+		private var _titlename:String;
 		
 		public function Mediabox() 
 		{
@@ -54,6 +55,7 @@ package components.Mediabox_beta2
 			
 			//titletext fields
 			titletext = titlename;
+			titletext.text = _titlename;
 			//undertitle = undername;
 			
 			titletext.selectable = false;
@@ -69,6 +71,10 @@ package components.Mediabox_beta2
 		private function mouseclickUngeStar (e:MouseEvent):void
 		{
 			
+		}
+		public function set title(_title:String):void
+		{
+			_titlename = _title;
 		}
 
 	}
