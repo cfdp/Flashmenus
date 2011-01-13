@@ -46,8 +46,8 @@ package core
 
 		private function fmswfContainerMouseOver (event:MouseEvent):void
 		{
-			Tweener.addTween(linkbox, { x:mouseX, time:1 } );
-			Tweener.addTween(linkbox, { y:mouseY, time:1 } );
+			Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
+			Tweener.addTween(linkbox, { y:mouseY, time:0.5, transition:"easeOutSine" } );
 			addChild(linkbox);
 			
 			
