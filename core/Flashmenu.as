@@ -29,6 +29,8 @@ package core
 		private var roomxmlloader:BulkLoader;
 		private var roomxml:XML;
 		private var mediaobj:Mediabox;
+		private var defaultxml:XML;
+		private var movieclipArray:Array;
 
 
 		//contstructor 
@@ -39,7 +41,7 @@ package core
 			loadxml();
 			mediaobj = new Mediabox();
 			mediaobj.x = 20;
-			mediaobj.y = 40;
+			mediaobj.y = 20;
 			addChild(mediaobj);
 
 			
@@ -53,7 +55,8 @@ package core
 			baseurl = "http://udvikling.cyberhus.dk/";
 			var xmlUrl:String = baseurl + "fmitems/1053";
 			basexmlloader = new BulkLoader("main-site");
-			basexmlloader.add(xmlUrl, { id:"basexml",type:"xml" } );
+			basexmlloader.add(xmlUrl, { id:"basexml", type:"xml" } );
+			basexmlloader.add(baseurl + "fmblandet/alle", { id:"defaultmediaboxcontent", type:"xml" } );
 			basexmlloader.addEventListener(BulkProgressEvent.COMPLETE, onAllItemsloaded);
 			basexmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
 			basexmlloader.start();
@@ -67,12 +70,13 @@ package core
 		private function onAllItemsloaded (e:Event):void
 		{
 			basexml = basexmlloader.getXML("basexml");
+			defaultxml = basexmlloader.getXML("defaultmediaboxcontent");
 			roomxmlloader = new BulkLoader("roomxml");
 			
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
 				roomxmlloader.add(baseurl + basexml..node[i].node_data_field_text_field_text, { id:basexml..node[i].node_title, type:"xml" } );
-				roomxmlloader.add(baseurl + basexml..node[i].files_node_data_field_swffile_filepath, { id:"roompic" + i} );
+				roomxmlloader.add(baseurl + basexml..node[i].files_node_data_field_swffile_filepath, { id:"roomswf" + i} );
 			}
 			roomxmlloader.addEventListener(BulkProgressEvent.COMPLETE, allRoomItemsLoaded);
 			roomxmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
@@ -82,43 +86,47 @@ package core
 		/*fires when ALL items are loaded*/
 		private function allRoomItemsLoaded(e:Event):void
 		{
-			//removing the Textfield and setting the varibel to null making it ready for trash collection
-			removeChild(progressOutput);
-			progressOutput = null;
-		
-			
+			movieclipArray = new Array();
+			for (var i:Number = 0; i < countXmlItems; i++)
+			{
+				movieclipArray.push(roomxmlloader.getMovieClip("roomswf" + i));
+			}
+			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray);
+			addChild(placeFmswf);
+			setupMediaText();
+
 		}
 		/*passses the progress information to the mediabox so the user can follow and see the progress*/
 		private function allRoomProgress(e:BulkProgressEvent):void
 		{
 			
-			mediaobj.titletext("Henter ting: " + e.itemsLoaded + " / " + e.itemsTotal);
+			mediaobj.titlename.text = "Henter elementer " + e.itemsLoaded + " / " + e.itemsTotal;
+			
 			
 		}
 
 		//creating the textfield for show the load progress
-		private function createProgressIndicator():void
-		{
 
-			progressOutput = new TextField();
-			progressOutput.background = true;
-			progressOutput.autoSize = TextFieldAutoSize.LEFT;
-			var tf:TextFormat = new TextFormat();
-			tf.bold = true;
-			tf.font = "Verdana";
-			tf.size = 12;
-			progressOutput.defaultTextFormat = tf;
-			progressOutput.text = "Henter ting: ";
-			progressOutput.x = 70;
-			progressOutput.y = 30;
-			addChild(progressOutput);
-			
-
-			
-		}
 		private function createRoomId():void
 		{
 			
+		}
+		/*Set the default text for the mediabox
+		 * 
+		 * */
+		private function setupMediaText():void
+		{
+			mediaobj.titlename.text = "Ungeblogs";
+			mediaobj.undertitle.text = "Sundhed og velvære";
+			mediaobj.textitem1.headline.text = defaultxml..node[0].node_title;
+			mediaobj.textitem2.headline.text = defaultxml..node[1].node_title;
+			mediaobj.textitem3.headline.text = defaultxml..node[2].node_title;
+			mediaobj.textitem1.type.text = "Type: "+defaultxml..node[0].node_type;
+			mediaobj.textitem2.type.text = "Type: "+defaultxml..node[1].node_type;
+			mediaobj.textitem3.type.text = "Type: "+defaultxml..node[2].node_type;
+			mediaobj.textitem1.readmore.text = "Læs mere";
+			mediaobj.textitem2.readmore.text = "Læs mere";
+			mediaobj.textitem3.readmore.text = "Læs mere";
 		}
 
 		// count how many menu items there are in the base xml file

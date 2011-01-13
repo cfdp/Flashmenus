@@ -1,10 +1,8 @@
 package core 
 {
 	
-	import br.com.stimuli.loading.BulkLoader;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import utilis.loadcontent.Swfloader;
 	/**
 	 * ...
 	 * @author Rene Skou
@@ -14,12 +12,15 @@ package core
 	{
 		private var dataObject:XML;
 		private var baseurl:String;
+		private var movieclipArray:Array;
 		
 		
-		public function Fmswf(xmlobj:XML,burl:String) 
+		
+		public function Fmswf(xmlobj:XML,burl:String,mcarray:Array) 
 		{
 			dataObject = xmlobj;
 			baseurl = burl;
+			movieclipArray = mcarray;
 			
 			
 			//for loop for generating the fmswf's and placing them on stage
@@ -28,11 +29,10 @@ package core
 				var fmswfContainer:Sprite = new Sprite();
 				fmswfContainer.x = dataObject..node[i].node_data_field_text_field_swf_x;
 				fmswfContainer.y = dataObject..node[i].node_data_field_text_field_swf_y;
-				var fmswfContent:Swfloader = new Swfloader( baseurl+ dataObject..node[i].files_node_data_field_swffile_filepath);
 				fmswfContainer.buttonMode = true;
 				fmswfContainer.useHandCursor = true;
 				fmswfContainer.mouseChildren = false;
-				fmswfContainer.addChild(fmswfContent);
+				fmswfContainer.addChild(movieclipArray[i]);
 				addChild(fmswfContainer);
 				
 				fmswfContainer.addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);

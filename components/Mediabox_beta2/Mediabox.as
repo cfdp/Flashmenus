@@ -4,6 +4,8 @@ package components.Mediabox_beta2
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import caurina.transitions.Tweener;
+	import flash.text.TextFormat;
+	import flash.text.TextFieldAutoSize;
 	
 	
 	/**
@@ -17,10 +19,10 @@ package components.Mediabox_beta2
 		private var itembox2:MovieClip;
 		private var itembox3:MovieClip;
 		private var titletext:TextField;
-		private var undertitle:TextField;
 		private var ungeblog:MovieClip;
 		private var starway:MovieClip;
-		private var _titlename:String;
+		private var tf:TextFormat;
+
 		
 		public function Mediabox() 
 		{
@@ -29,6 +31,12 @@ package components.Mediabox_beta2
 		//adds listener to items and mouse action
 		private function setupitems ():void
 		{
+			tf = new TextFormat();
+			tf.bold = true;
+			tf.size = 12;
+			tf.font = "Verdana";
+			
+
 			//tell the compiler they are movieclips
 			itembox1 = textitem1;
 			itembox2 = textitem2;
@@ -53,29 +61,27 @@ package components.Mediabox_beta2
 			starway.addEventListener(MouseEvent.CLICK, mouseclickUngeStar);
 			ungeblog.addEventListener(MouseEvent.CLICK, mouseclickUngeStar);
 			
-			//titletext fields
+
 			titletext = titlename;
-			titletext.text = _titlename;
-			//undertitle = undername;
-			
 			titletext.selectable = false;
-			//undertitle.selectable = false;
+			titletext.autoSize = TextFieldAutoSize.CENTER;
+			titletext.defaultTextFormat = tf;
+			titletext.text = "Henter elementer 0 / 00";
+			
+
 			
 		}
 		//mouse event when client click the itembox
 		private function mouseclickItembox (e:MouseEvent):void
 		{
-			Tweener.addTween(titletext, { x:10, time:1,onComplete:function(){Tweener.addTween(titletext, {x:54.5,time:1})} } );
+			
 		}
 		// eventhandler for starway and ungeblog movieclip
 		private function mouseclickUngeStar (e:MouseEvent):void
 		{
 			
 		}
-		public function set title(_title:String):void
-		{
-			_titlename = _title;
-		}
+
 
 	}
 
