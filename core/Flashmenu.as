@@ -17,6 +17,7 @@ package core
 	 * ...
 	 * @author Rene Skou
 	 * @description Flashmenu for Cyberhus 2011
+	 * 
 	 * The main file for the Flashmenu, it takes care of all the loading that needs to be done
 	 */
 	public class Flashmenu extends MovieClip
@@ -83,7 +84,9 @@ package core
 			roomxmlloader.start();
 			
 		}
-		/*fires when ALL items are loaded*/
+		/*fires when ALL items are loaded
+		 * creating an instance of the fmswf class and passes the parameters to it
+		 * push the swf in a array container*/
 		private function allRoomItemsLoaded(e:Event):void
 		{
 			movieclipArray = new Array();
@@ -129,7 +132,9 @@ package core
 			mediaobj.textitem3.readmore.text = "Læs mere";
 		}
 
-		// count how many menu items there are in the base xml file
+		/*count how many menu items there are in the base xml file
+		 * this function also serves as number container for loops
+		 * */
 		private function get countXmlItems():Number
 		{
 			return basexml..node.length();

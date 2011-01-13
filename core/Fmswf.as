@@ -1,8 +1,10 @@
 package core 
 {
 	
+	import components.Hoverbox_beta2.Hoverbox;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import caurina.transitions.Tweener;
 	/**
 	 * ...
 	 * @author Rene Skou
@@ -13,6 +15,7 @@ package core
 		private var dataObject:XML;
 		private var baseurl:String;
 		private var movieclipArray:Array;
+		private var linkbox:Hoverbox;
 		
 		
 		
@@ -21,6 +24,7 @@ package core
 			dataObject = xmlobj;
 			baseurl = burl;
 			movieclipArray = mcarray;
+			linkbox = new Hoverbox();
 			
 			
 			//for loop for generating the fmswf's and placing them on stage
@@ -42,6 +46,10 @@ package core
 
 		private function fmswfContainerMouseOver (event:MouseEvent):void
 		{
+			Tweener.addTween(linkbox, { x:mouseX, time:1 } );
+			Tweener.addTween(linkbox, { y:mouseY, time:1 } );
+			addChild(linkbox);
+			
 			
 		}
 		//counting the nodes  so i know how many swf to generate in my for loop.
