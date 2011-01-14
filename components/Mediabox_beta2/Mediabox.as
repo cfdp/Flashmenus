@@ -22,6 +22,7 @@ package components.Mediabox_beta2
 		private var ungeblog:MovieClip;
 		private var starway:MovieClip;
 		private var tf:TextFormat;
+		private var _headline:String;
 
 		
 		public function Mediabox() 
@@ -68,6 +69,8 @@ package components.Mediabox_beta2
 			titletext.defaultTextFormat = tf;
 			titletext.text = "Henter elementer 0 / 00";
 			
+			
+			
 
 			
 		}
@@ -80,6 +83,11 @@ package components.Mediabox_beta2
 		private function mouseclickUngeStar (e:MouseEvent):void
 		{
 			
+		}
+		public function setText(hl:String):void
+		{
+			_headline = hl;
+			itembox1.headline.text = _headline;
 		}
 
 

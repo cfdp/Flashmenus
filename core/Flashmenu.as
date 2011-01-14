@@ -78,12 +78,14 @@ package core
 		private function onAllItemsloaded (e:Event):void
 		{
 			basexml = basexmlloader.getXML("basexml");
+			
 			defaultxml = basexmlloader.getXML("defaultmediaboxcontent");
+			setupMediaText();
 			roomxmlloader = new BulkLoader("roomxml");
 			
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
-				roomxmlloader.add(baseurl + basexml..node[i].node_data_field_text_field_text, { id:basexml..node[i].node_title, type:"xml" } );
+				
 				roomxmlloader.add(baseurl + basexml..node[i].files_node_data_field_swffile_filepath, { id:"roomswf" + i} );
 			}
 			roomxmlloader.addEventListener(BulkProgressEvent.COMPLETE, allRoomItemsLoaded);
@@ -101,9 +103,11 @@ package core
 			{
 				movieclipArray.push(roomxmlloader.getMovieClip("roomswf" + i));
 			}
-			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray);
+			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj);
 			addChild(placeFmswf);
-			setupMediaText();
+			mediaobj.titlename.text = "Ungeblogs";
+			mediaobj.undertitle.text = "Sundhed og velvære";
+			
 
 		}
 		/*passses the progress information to the mediabox so the user can follow and see the progress*/
@@ -126,8 +130,7 @@ package core
 		 * */
 		private function setupMediaText():void
 		{
-			mediaobj.titlename.text = "Ungeblogs";
-			mediaobj.undertitle.text = "Sundhed og velvære";
+			
 			mediaobj.textitem1.headline.text = defaultxml..node[0].node_title;
 			mediaobj.textitem2.headline.text = defaultxml..node[1].node_title;
 			mediaobj.textitem3.headline.text = defaultxml..node[2].node_title;
