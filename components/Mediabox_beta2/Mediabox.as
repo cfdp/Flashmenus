@@ -6,6 +6,7 @@ package components.Mediabox_beta2
 	import caurina.transitions.Tweener;
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
+	import utilis.xml.Htmldecoder;
 	
 	
 	/**
@@ -23,6 +24,7 @@ package components.Mediabox_beta2
 		private var starway:MovieClip;
 		private var tf:TextFormat;
 		private var _headline:String;
+		private var _tf:TextFormat;
 
 		
 		public function Mediabox() 
@@ -36,6 +38,11 @@ package components.Mediabox_beta2
 			tf.bold = true;
 			tf.size = 12;
 			tf.font = "Verdana";
+			
+			_tf = new TextFormat();
+			_tf.bold = true;
+			_tf.font = "Verdana";
+			_tf.size = 10;
 			
 
 			//tell the compiler they are movieclips
@@ -84,11 +91,53 @@ package components.Mediabox_beta2
 		{
 			
 		}
-		public function setTextitem1(hl:String):void
+		//functions for setting up text for the item text fields.
+		public function setTextitem0(headline:String,date:String,type:String):void
 		{
-			_headline = hl;
-			itembox1.headline.text = _headline;
+			itembox1.headline.htmlText = "<b>" + headline + "</b>";
+			if (itembox1.headline.textWidth > 173)
+			{
+				
+				itembox1.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox1.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			
+			itembox1.type.htmlText = "Type: "+type;
+			itembox1.date.htmlText = date;
+
 		}
+		public function setTextitem1(headline:String,date:String,type:String):void
+		{
+			itembox2.headline.htmlText = "<b>" + headline + "</b>";
+						if (itembox2.headline.textWidth > 173)
+			{
+				
+				itembox2.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox2.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox2.type.htmlText = "Type: "+type;
+			itembox2.date.htmlText = date;
+		}
+		public function setTextitem2(headline:String,date:String,type:String):void
+		{
+
+			itembox3.headline.htmlText = "<b>" + headline + "</b>";
+						if (itembox3.headline.textWidth > 173)
+			{
+				
+				itembox3.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox3.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox3.type.htmlText = "Type: "+type;
+			itembox3.date.htmlText = date;
+		}
+		//end of functions
 
 
 	}

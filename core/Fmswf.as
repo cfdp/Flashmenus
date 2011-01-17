@@ -131,14 +131,30 @@ package core
 			setLatestText();
 
 		}
+		//Setting text in mediabox when user clicks det link on the hoverbox
 		private function setLatestText():void
 		{
-			var newdate:Date = new Date();
+			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
-			newdate.setTime(latestXmlObject..node[0].node_created * 1000);
-			mediabox.setTextitem1(latestXmlObject..node[0].node_title);
-			var num:String = newdate.getDate() + "-" + "0" + (newdate.getMonth() + 1) + "-" + newdate.getFullYear();
-			trace(num);
+			
+			
+
+			
+				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
+				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
+				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
+				
+
+			
+			
+		}
+		private function setTextDate(num:int):String
+		{
+			var newdate:Date = new Date();
+			newdate.setTime(latestXmlObject..node[num].node_created * 1000);
+			var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
+			return textdate;
+			
 		}
 		private function containerClickHandler(e:MouseEvent):void
 		{

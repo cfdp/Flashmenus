@@ -9,6 +9,7 @@ package core
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	import utilis.xml.Htmldecoder;
 
 	
 	
@@ -130,14 +131,19 @@ package core
 		 * */
 		private function setupMediaText():void
 		{
-			
-			mediaobj.textitem1.headline.text = defaultxml..node[0].node_title;
-			mediaobj.textitem2.headline.text = defaultxml..node[1].node_title;
-			mediaobj.textitem3.headline.text = defaultxml..node[2].node_title;
-			mediaobj.textitem1.type.text = "Type: "+defaultxml..node[0].node_type;
-			mediaobj.textitem2.type.text = "Type: "+defaultxml..node[1].node_type;
-			mediaobj.textitem3.type.text = "Type: "+defaultxml..node[2].node_type;
 
+			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
+			mediaobj.setTextitem1(defaultxml..node[1].node_title, setTextDate(1), defaultxml..node[1].node_type);
+			mediaobj.setTextitem2(defaultxml..node[2].node_title, setTextDate(2), defaultxml..node[2].node_type);
+
+		}
+		private function setTextDate(num:int):String
+		{
+			var newdate:Date = new Date();
+			newdate.setTime(defaultxml..node[num].node_created * 1000);
+			var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
+			return textdate;
+			
 		}
 
 		/*count how many menu items there are in the base xml file

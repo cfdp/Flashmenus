@@ -12,6 +12,9 @@ package components
 	 */
 	public class Textitems extends MovieClip 
 	{
+		private var headlineTextformat:TextFormat;
+		private var tf:TextFormat;
+		private var _headline:TextField;
 		
 		public function Textitems() 
 		{
@@ -21,19 +24,25 @@ package components
 			this.addEventListener(MouseEvent.MOUSE_OVER, mouseoverTextitem);
 			this.addEventListener(MouseEvent.MOUSE_OUT, mouseoutTextitem);
 			
-			var tf:TextFormat = new TextFormat();
+			tf= new TextFormat();
 			tf.bold = true;
 			tf.size = 10;
 			tf.font = "Verdana";
+			tf.color = 0x000000;
 			
 			var textformat:TextFormat = new TextFormat();
 			textformat.bold = false;
 			textformat.size = 9;
 			textformat.font = "Verdana";
 			
-			var _headline:TextField = headline;
-			_headline.autoSize = TextFieldAutoSize.LEFT;
+			headlineTextformat = new TextFormat();
+			headlineTextformat.color = 0x00A7FF;
+			
+			_headline = headline;
+			
 			_headline.defaultTextFormat = tf;
+			
+			
 			
 			var _type:TextField = type;
 			_type.autoSize = TextFieldAutoSize.LEFT;
@@ -49,11 +58,13 @@ package components
 		private function mouseoverTextitem(e:MouseEvent):void
 		{
 			dot.gotoAndStop(2);
+			_headline.setTextFormat(headlineTextformat);
 			
 		}
 		private function mouseoutTextitem(e:MouseEvent):void
 		{
 			dot.gotoAndStop(1);
+			_headline.setTextFormat(tf);
 		}
 		
 	}
