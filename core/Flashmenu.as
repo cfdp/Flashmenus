@@ -137,9 +137,7 @@ package core
 			mediaobj.textitem1.type.text = "Type: "+defaultxml..node[0].node_type;
 			mediaobj.textitem2.type.text = "Type: "+defaultxml..node[1].node_type;
 			mediaobj.textitem3.type.text = "Type: "+defaultxml..node[2].node_type;
-			mediaobj.textitem1.readmore.text = "Læs mere";
-			mediaobj.textitem2.readmore.text = "Læs mere";
-			mediaobj.textitem3.readmore.text = "Læs mere";
+
 		}
 
 		/*count how many menu items there are in the base xml file

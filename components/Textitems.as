@@ -43,9 +43,7 @@ package components
 			_date.autoSize = TextFieldAutoSize.LEFT;
 			_date.defaultTextFormat = textformat;
 			
-			var _readmore:TextField = readmore;
-			_readmore.autoSize = TextFieldAutoSize.LEFT;
-			_readmore.defaultTextFormat = textformat;
+
 			
 		}
 		private function mouseoverTextitem(e:MouseEvent):void

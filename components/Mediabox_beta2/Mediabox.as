@@ -84,7 +84,7 @@ package components.Mediabox_beta2
 		{
 			
 		}
-		public function setText(hl:String):void
+		public function setTextitem1(hl:String):void
 		{
 			_headline = hl;
 			itembox1.headline.text = _headline;

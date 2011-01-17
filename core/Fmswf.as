@@ -1,6 +1,8 @@
 package core 
 {
 	
+	import br.com.stimuli.loading.BulkLoader;
+	import br.com.stimuli.loading.BulkProgressEvent;
 	import components.Hoverbox_beta2.Hoverbox;
 	import components.Mediabox_beta2.Mediabox;
 	import flash.display.Sprite;
@@ -24,6 +26,10 @@ package core
 		private var hoverboxExcist:Boolean;
 		private var movieclipIdArray:Array;
 		private var mediabox:Mediabox;
+		private var latestXmlloader:BulkLoader;
+		private var latestXmlIdArray:Array;
+		private var latestXmlobjArray:Array;
+		private var latestXmlObject:XML;
 		
 		
 		
@@ -35,6 +41,12 @@ package core
 			hoverboxExcist = false;
 			movieclipIdArray = new Array();
 			mediabox = media;
+			latestXmlIdArray = new Array();
+			latestXmlobjArray = new Array();
+			latestXmlloader = new BulkLoader("latestinroom");
+			latestXmlIdArray.push("hallo");
+			latestXmlobjArray.push("hallo");
+
 			
 			
 			
@@ -70,7 +82,7 @@ package core
 				Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 				Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
 				linkbox.mc_room.toroom.text = "Til " + event.target.name;
-				linkbox.mc_latest.latest.text = "Læs mere";
+				linkbox.mc_latest.latest.text = "Seneste nyheder";
 			}else {
 					movieclipId = event.target.name;
 					linkbox = new Hoverbox(movieclipId,dataObject,baseurl);
@@ -78,8 +90,9 @@ package core
 					Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 					Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
 					linkbox.mc_room.toroom.text = "Til " + event.target.name;
-					linkbox.mc_latest.latest.text = "Læs mere";
+					linkbox.mc_latest.latest.text = "Seneste nyheder";
 					linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
+					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
 					addChild(linkbox);
 				}
 			
@@ -87,6 +100,45 @@ package core
 		private function latestClickHandler(e:MouseEvent):void
 		{
 			
+			
+			if (checkId())
+			{
+				setLatestText();
+			}else {
+				
+			latestXmlIdArray.push(movieclipId);
+			latestXmlloader.add(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text,{id:movieclipId,type:"xml"});
+			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
+			latestXmlloader.start();
+			}
+			
+		}
+		private function checkId():Boolean
+		{
+			if (latestXmlIdArray[latestXmlIdArray.indexOf(movieclipId)] === movieclipId)
+			{
+				return true;
+			}else {
+				return false;
+				
+			}
+			
+			
+		}
+		private function latestItemsloaded(e:Event):void
+		{
+			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
+			setLatestText();
+
+		}
+		private function setLatestText():void
+		{
+			var newdate:Date = new Date();
+			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
+			newdate.setTime(latestXmlObject..node[0].node_created * 1000);
+			mediabox.setTextitem1(latestXmlObject..node[0].node_title);
+			var num:String = newdate.getDate() + "-" + "0" + (newdate.getMonth() + 1) + "-" + newdate.getFullYear();
+			trace(num);
 		}
 		private function containerClickHandler(e:MouseEvent):void
 		{
