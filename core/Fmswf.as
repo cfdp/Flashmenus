@@ -109,26 +109,27 @@ package core
 		 * */
 		private function latestClickHandler(e:MouseEvent):void
 		{
-			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text
+			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
 			
 			if (checkId())
 			{
 				setLatestText();
-			}else if (mediacontenturl is null) {
+			}else if (mediacontenturl != null) {
 				
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
-			TextField(mediabox.msgarea.messagecontainer).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
-				
-
-			}else {
-			
+	
 			latestXmlIdArray.push(movieclipId);
 			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
 			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
 			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
 			latestXmlloader.start();
+				
+
+			}else {
+			
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			TextField(mediabox.msgarea.messagecontainer).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
 				
 			}
 			

@@ -142,20 +142,38 @@ package core
 		 * */
 		private function setupMediaText():void
 		{
+			
 
 			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
 			mediaobj.setTextitem1(defaultxml..node[1].node_title, setTextDate(1), defaultxml..node[1].node_type);
 			mediaobj.setTextitem2(defaultxml..node[2].node_title, setTextDate(2), defaultxml..node[2].node_type);
+			
 
 		}
 		private function setTextDate(num:int):String
 		{
-			var newdate:Date = new Date();
-			newdate.setTime(defaultxml..node[num].node_created * 1000);
-			var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
-			return textdate;
+			
+			var unixtime:Number = defaultxml..node[num].node_created;
+			var data:String = "ingen Data";
+			
+			if (isNaN(unixtime))
+			{
+				
+				return data;
+				
+			}else {
+				
+				
+				var newdate:Date = new Date();
+				newdate.setTime(unixtime * 1000);
+				var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
+				return textdate;
+	
+			}
 			
 		}
+
+		
 
 		/*count how many menu items there are in the base xml file
 		 * this function also serves as number container for loops

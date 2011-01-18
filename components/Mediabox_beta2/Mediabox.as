@@ -137,6 +137,7 @@ package components.Mediabox_beta2
 			itembox3.type.htmlText = "Type: "+type;
 			itembox3.date.htmlText = date;
 		}
+
 		//end of functions
 
 
