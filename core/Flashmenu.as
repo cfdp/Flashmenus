@@ -5,6 +5,7 @@ package core
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import components.Mediabox_beta2.Mediabox;
 	import flash.display.MovieClip;
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -68,6 +69,7 @@ package core
 			basexmlloader.add(baseurl + "fmblandet/alle", { id:"defaultmediaboxcontent", type:"xml" } );
 			basexmlloader.addEventListener(BulkProgressEvent.COMPLETE, onAllItemsloaded);
 			basexmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
+			basexmlloader.addEventListener(BulkLoader.ERROR, onError);
 			basexmlloader.start();
 
 			//trace(buildingSiteText.length());
@@ -91,8 +93,17 @@ package core
 			}
 			roomxmlloader.addEventListener(BulkProgressEvent.COMPLETE, allRoomItemsLoaded);
 			roomxmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
+			roomxmlloader.addEventListener(BulkLoader.ERROR, onError);
 			roomxmlloader.start();
 			
+		}
+		/*Handles error events if the xml is not loaded*/
+		private function onError (e:ErrorEvent):void
+		{
+			MovieClip(mediaobj.textitem1).visible = false;
+			MovieClip(mediaobj.textitem2).visible = false;
+			MovieClip(mediaobj.textitem3).visible = false;
+			TextField(mediaobj.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 		/*fires when ALL items are loaded
 		 * creating an instance of the fmswf class and passes the parameters to it

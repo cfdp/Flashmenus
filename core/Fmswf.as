@@ -6,11 +6,15 @@ package core
 	import components.Hoverbox_beta2.Hoverbox;
 	import components.Mediabox_beta2.Mediabox;
 	import flash.display.Sprite;
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import caurina.transitions.Tweener;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
+	import flash.display.MovieClip;
+	import flash.text.TextField;
+	
 	/**
 	 * ...
 	 * @author Rene Skou
@@ -30,6 +34,7 @@ package core
 		private var latestXmlIdArray:Array;
 		private var latestXmlobjArray:Array;
 		private var latestXmlObject:XML;
+		private var mediacontenturl:String;
 		
 		
 		
@@ -97,21 +102,43 @@ package core
 				}
 			
 		}
+		/*Function to handel loading of text for the mediabox
+		 * it checks the id first to see if the xml object excist
+		 * if the xml does not excist or the url is null it loads statics text from another xml object
+		 * if non of the above checks true it throws an error
+		 * */
 		private function latestClickHandler(e:MouseEvent):void
 		{
-			
+			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text
 			
 			if (checkId())
 			{
 				setLatestText();
-			}else {
+			}else if (mediacontenturl is null) {
 				
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			TextField(mediabox.msgarea.messagecontainer).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
+				
+
+			}else {
+			
 			latestXmlIdArray.push(movieclipId);
-			latestXmlloader.add(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text,{id:movieclipId,type:"xml"});
+			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
 			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
+			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
 			latestXmlloader.start();
+				
 			}
 			
+		}
+		private function onError (e:ErrorEvent):void
+		{
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			TextField(mediabox.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 		private function checkId():Boolean
 		{
@@ -125,6 +152,8 @@ package core
 			
 			
 		}
+		/*if the xmlobject is loaded is puts it in a array and setup the text
+		 * */
 		private function latestItemsloaded(e:Event):void
 		{
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
