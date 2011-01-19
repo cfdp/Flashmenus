@@ -140,6 +140,8 @@ package components.Mediabox_beta2
 		}
 
 		//end of functions
+		
+		//to test and change the type to a more readerfriendly word
 		private function testString(type:String):String
 		{
 			switch(type)
