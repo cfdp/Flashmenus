@@ -9,6 +9,7 @@ package components
 	/**
 	 * ...
 	 * @author René Skou
+	 * the text object that's holds teh 3 text fields for the mediabox
 	 */
 	public class Textitems extends MovieClip 
 	{
@@ -16,6 +17,7 @@ package components
 		private var tf:TextFormat;
 		private var _headline:TextField;
 		
+		//setting up the text elements in the constructor
 		public function Textitems() 
 		{
 			this.buttonMode = true;
@@ -55,6 +57,7 @@ package components
 
 			
 		}
+		//mouse over and out functions for the text object that makes another color in the dot and sets the textformat.
 		private function mouseoverTextitem(e:MouseEvent):void
 		{
 			dot.gotoAndStop(2);

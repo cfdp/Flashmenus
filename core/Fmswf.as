@@ -11,10 +11,12 @@ package core
 	import caurina.transitions.Tweener;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
 	/**
 	 * ...
 	 * @author Rene Skou
-	 * @description class to handler the placement of fmswf items
+	 * @description class to handler the placement of fmswf items and instanciating mediabox and hoverbox.
+	 * 
 	 */
 	public class Fmswf extends Sprite
 	{
@@ -44,8 +46,8 @@ package core
 			latestXmlIdArray = new Array();
 			latestXmlobjArray = new Array();
 			latestXmlloader = new BulkLoader("latestinroom");
-			latestXmlIdArray.push("hallo");
-			latestXmlobjArray.push("hallo");
+			latestXmlIdArray.push("empty");
+			latestXmlobjArray.push("empty");
 
 			
 			
@@ -73,6 +75,8 @@ package core
 			
 		}
 
+		/*Check to see if there is more than one instance of the hoverbox
+		 * if there are one only add trasition and text*/
 		private function fmswfContainerMouseOver (event:MouseEvent):void
 		{
 			if (hoverboxExcist)
@@ -113,6 +117,7 @@ package core
 			}
 			
 		}
+		//check the id of the hoverbox so the xml only gets loaded one time
 		private function checkId():Boolean
 		{
 			if (latestXmlIdArray[latestXmlIdArray.indexOf(movieclipId)] === movieclipId)
@@ -139,15 +144,17 @@ package core
 			
 			
 
-			
+				TextField(mediabox.titlename).text = movieclipId;
 				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
 				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
 				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
+				
 				
 
 			
 			
 		}
+		/*Function to convert the unixtime stamp into a date object*/
 		private function setTextDate(num:int):String
 		{
 			var newdate:Date = new Date();
@@ -156,6 +163,7 @@ package core
 			return textdate;
 			
 		}
+		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
 			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"self");

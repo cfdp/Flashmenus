@@ -13,6 +13,7 @@ package components.Mediabox_beta2
 	 * ...
 	 * @author Rene Skou
 	 * @description class for showing dynamic created content by drupal cms system
+	 * in the mediabox
 	 */
 	public class Mediabox extends MovieClip 
 	{

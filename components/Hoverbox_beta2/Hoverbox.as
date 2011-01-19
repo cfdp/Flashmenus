@@ -10,6 +10,7 @@ package components.Hoverbox_beta2
 	/**
 	 * ...
 	 * @author René Skou
+	 * A floating box with holds the 2 links the room and to show the 3 latest content items 
 	 */
 	public class Hoverbox extends MovieClip 
 	{
@@ -30,6 +31,7 @@ package components.Hoverbox_beta2
 			xmlObject = xmlobj;
 			baseurl = burl;
 		}
+		//setting up the text and textfields
 		private function setupTextfields():void
 		{
 			textformat = new TextFormat();
@@ -74,6 +76,7 @@ package components.Hoverbox_beta2
 		{
 			
 		}
+		//functions to set the textformat
 		private function roommouseoverHandler(e:MouseEvent):void
 		{
 			
@@ -94,6 +97,7 @@ package components.Hoverbox_beta2
 			
 			latestpost.setTextFormat(textformat);
 		}
+		//public function to set the id of the hoverbox
 		public function setId(idname:String):void
 		{
 			movieclipId = idname;
