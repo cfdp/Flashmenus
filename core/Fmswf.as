@@ -180,9 +180,8 @@ package core
 		//Setting text in mediabox when user clicks det link on the hoverbox
 		private function setLatestText():void
 		{
-
-			
-			
+			//Setting the varible to the xml object
+			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
 
 				TextField(mediabox.titlename).text = movieclipId;
 				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);

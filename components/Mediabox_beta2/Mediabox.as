@@ -105,7 +105,7 @@ package components.Mediabox_beta2
 				itembox1.headline.htmlText = "<b>" + headline + "</b>";
 			}
 			
-			itembox1.type.htmlText = "Type: "+type;
+			itembox1.type.htmlText = " "+testString(type);
 			itembox1.date.htmlText = date;
 
 		}
@@ -120,7 +120,7 @@ package components.Mediabox_beta2
 			}else{
 				itembox2.headline.htmlText = "<b>" + headline + "</b>";
 			}
-			itembox2.type.htmlText = "Type: "+type;
+			itembox2.type.htmlText = " "+testString(type);
 			itembox2.date.htmlText = date;
 		}
 		public function setTextitem2(headline:String,date:String,type:String):void
@@ -135,11 +135,39 @@ package components.Mediabox_beta2
 			}else{
 				itembox3.headline.htmlText = "<b>" + headline + "</b>";
 			}
-			itembox3.type.htmlText = "Type: "+type;
+			itembox3.type.htmlText = " "+testString(type);
 			itembox3.date.htmlText = date;
 		}
 
 		//end of functions
+		private function testString(type:String):String
+		{
+			switch(type)
+			{
+				case "link_artikel":
+				return "Artikel";
+				break;
+				
+				case "poll":
+				return "Afstemning";
+				break;
+				
+				case "blog":
+				return "Blog";
+				break;
+				
+				case "faq":
+				return "Brevkassesvar";
+				break;
+				
+				case "page":
+				return "Side";
+				break;
+				
+				default:
+				return type;
+			}
+		}
 
 
 	}
