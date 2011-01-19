@@ -1,6 +1,7 @@
 package core 
 {
 	
+	
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import components.Mediabox_beta2.Mediabox;

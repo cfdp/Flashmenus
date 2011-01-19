@@ -75,6 +75,7 @@ package components.Hoverbox_beta2
 		private function roomClickHandler(e:MouseEvent):void
 		{
 			
+			
 		}
 		//functions to set the textformat
 		private function roommouseoverHandler(e:MouseEvent):void

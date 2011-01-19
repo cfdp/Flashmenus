@@ -17,6 +17,7 @@ package components.Mediabox_beta2
 	 */
 	public class Mediabox extends MovieClip 
 	{
+		
 		private var itembox1:MovieClip;
 		private var itembox2:MovieClip;
 		private var itembox3:MovieClip;

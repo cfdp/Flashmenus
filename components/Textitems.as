@@ -13,6 +13,7 @@ package components
 	 */
 	public class Textitems extends MovieClip 
 	{
+		
 		private var headlineTextformat:TextFormat;
 		private var tf:TextFormat;
 		private var _headline:TextField;

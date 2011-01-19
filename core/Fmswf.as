@@ -170,6 +170,7 @@ package core
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
+			
 
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
 			//Setting the varible to the xml object
