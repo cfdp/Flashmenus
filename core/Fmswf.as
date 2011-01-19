@@ -12,13 +12,13 @@ package core
 	import caurina.transitions.Tweener;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
-<<<<<<< HEAD
+
 	import flash.text.TextField;
-=======
+
 	import flash.display.MovieClip;
 	import flash.text.TextField;
 	
->>>>>>> abf87c97656b58a601abca3174f2bcf649f6c2d3
+
 	/**
 	 * ...
 	 * @author Rene Skou
@@ -143,9 +143,9 @@ package core
 			}
 			
 		}
-<<<<<<< HEAD
+
 		//check the id of the hoverbox so the xml only gets loaded one time
-=======
+
 		private function onError (e:ErrorEvent):void
 		{
 			MovieClip(mediabox.textitem1).visible = false;
@@ -153,7 +153,7 @@ package core
 			MovieClip(mediabox.textitem3).visible = false;
 			TextField(mediabox.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
->>>>>>> abf87c97656b58a601abca3174f2bcf649f6c2d3
+
 		private function checkId():Boolean
 		{
 			if (latestXmlIdArray[latestXmlIdArray.indexOf(movieclipId)] === movieclipId)
