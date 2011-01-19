@@ -11,6 +11,10 @@ package core
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import utilis.xml.Htmldecoder;
+	import flash.events.MouseEvent;
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
+	
 
 	
 	
@@ -147,8 +151,23 @@ package core
 			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
 			mediaobj.setTextitem1(defaultxml..node[1].node_title, setTextDate(1), defaultxml..node[1].node_type);
 			mediaobj.setTextitem2(defaultxml..node[2].node_title, setTextDate(2), defaultxml..node[2].node_type);
+			MovieClip(mediaobj.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+			MovieClip(mediaobj.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+			MovieClip(mediaobj.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
 			
 
+		}
+		private function textitem1clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[0].nid),"_self");
+		}
+		private function textitem2clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[1].nid),"_self");
+		}
+		private function textitem3clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[2].nid),"_self");
 		}
 		private function setTextDate(num:int):String
 		{

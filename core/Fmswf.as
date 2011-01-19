@@ -170,15 +170,17 @@ package core
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
+
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
+			//Setting the varible to the xml object
+			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
 			setLatestText();
 
 		}
 		//Setting text in mediabox when user clicks det link on the hoverbox
 		private function setLatestText():void
 		{
-			//Setting the varible to the xml object
-			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
+
 			
 			
 
@@ -186,11 +188,26 @@ package core
 				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
 				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
 				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
+				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
 				
 				
 
 			
 			
+		}
+		private function textitem1clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[0].nid),"_self");
+		}
+		private function textitem2clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[1].nid),"_self");
+		}
+		private function textitem3clickhandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[2].nid),"_self");
 		}
 		/*Function to convert the unixtime stamp into a date object*/
 		private function setTextDate(num:int):String
@@ -204,7 +221,7 @@ package core
 		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
-			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"self");
+			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"_self");
 		}
 		private function hoverboxAddedHandler (e:Event):void
 		{
