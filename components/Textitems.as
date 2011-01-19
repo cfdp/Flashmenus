@@ -9,7 +9,7 @@ package components
 	/**
 	 * ...
 	 * @author René Skou
-	 * the text object that's holds teh 3 text fields for the mediabox
+	 * the text object that's holds the 3 text fields for the mediabox
 	 */
 	public class Textitems extends MovieClip 
 	{
