@@ -5,6 +5,7 @@ package core
 	import br.com.stimuli.loading.BulkProgressEvent;
 	import components.Mediabox_beta2.Mediabox;
 	import flash.display.MovieClip;
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -68,6 +69,7 @@ package core
 			basexmlloader.add(baseurl + "fmblandet/alle", { id:"defaultmediaboxcontent", type:"xml" } );
 			basexmlloader.addEventListener(BulkProgressEvent.COMPLETE, onAllItemsloaded);
 			basexmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
+			basexmlloader.addEventListener(BulkLoader.ERROR, onError);
 			basexmlloader.start();
 
 			//trace(buildingSiteText.length());
@@ -91,8 +93,17 @@ package core
 			}
 			roomxmlloader.addEventListener(BulkProgressEvent.COMPLETE, allRoomItemsLoaded);
 			roomxmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
+			roomxmlloader.addEventListener(BulkLoader.ERROR, onError);
 			roomxmlloader.start();
 			
+		}
+		/*Handles error events if the xml is not loaded*/
+		private function onError (e:ErrorEvent):void
+		{
+			MovieClip(mediaobj.textitem1).visible = false;
+			MovieClip(mediaobj.textitem2).visible = false;
+			MovieClip(mediaobj.textitem3).visible = false;
+			TextField(mediaobj.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 		/*fires when ALL items are loaded
 		 * creating an instance of the fmswf class and passes the parameters to it
@@ -131,20 +142,38 @@ package core
 		 * */
 		private function setupMediaText():void
 		{
+			
 
 			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
 			mediaobj.setTextitem1(defaultxml..node[1].node_title, setTextDate(1), defaultxml..node[1].node_type);
 			mediaobj.setTextitem2(defaultxml..node[2].node_title, setTextDate(2), defaultxml..node[2].node_type);
+			
 
 		}
 		private function setTextDate(num:int):String
 		{
-			var newdate:Date = new Date();
-			newdate.setTime(defaultxml..node[num].node_created * 1000);
-			var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
-			return textdate;
+			
+			var unixtime:Number = defaultxml..node[num].node_created;
+			var data:String = "ingen Data";
+			
+			if (isNaN(unixtime))
+			{
+				
+				return data;
+				
+			}else {
+				
+				
+				var newdate:Date = new Date();
+				newdate.setTime(unixtime * 1000);
+				var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
+				return textdate;
+	
+			}
 			
 		}
+
+		
 
 		/*count how many menu items there are in the base xml file
 		 * this function also serves as number container for loops
