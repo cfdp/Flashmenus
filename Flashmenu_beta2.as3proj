@@ -48,6 +48,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="tweener\tweener.swc" />
+    <element path="google\analytics.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

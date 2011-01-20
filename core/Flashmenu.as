@@ -15,6 +15,8 @@ package core
 	import flash.events.MouseEvent;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
+	import com.google.analytics.AnalyticsTracker;
+	import com.google.analytics.GATracker;
 	
 
 	
@@ -46,11 +48,13 @@ package core
 		private var mediaobj:Mediabox;
 		private var defaultxml:XML;
 		private var movieclipArray:Array;
+		private var tracker:AnalyticsTracker;
 
 
 		//contstructor 
 		public function Flashmenu() 
 		{
+			tracker = new GATracker(this, "UA-2898416-1", "AS3", true);
 			
 			//start loading the base xml file
 			loadxml();
