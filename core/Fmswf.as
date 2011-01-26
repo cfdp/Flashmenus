@@ -171,6 +171,7 @@ return false;
 private function latestItemsloaded(e:Event):void
 {
 
+
 latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
 //Setting the varible to the xml object
 latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
