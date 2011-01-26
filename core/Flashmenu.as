@@ -14,6 +14,7 @@ import flash.events.MouseEvent;
 import flash.net.navigateToURL;
 import flash.net.URLRequest;
 import flash.text.TextField;
+import flash.external.ExternalInterface;
 
 
 
@@ -51,7 +52,7 @@ private var tracker:AnalyticsTracker;
 //contstructor
 public function Flashmenu()
 {
-tracker = new GATracker(this, "UA-2898416-1", "AS3", true);
+tracker = new GATracker(this, "UA-2898416-1", "AS3", false);
 
 //start loading the base xml file
 loadxml();
@@ -68,11 +69,12 @@ private function loadxml():void
 
 
 
-baseurl = "http://udvikling.cyberhus.dk/";
-var xmlUrl:String = baseurl + "fmitems/1053";
+baseurl = ExternalInterface.call("baseurl");
+var startxml:String = ExternalInterface.call("startxml");
+var defaultxml:String = ExternalInterface.call("defaultxml");
 basexmlloader = new BulkLoader("main-site");
-basexmlloader.add(xmlUrl, { id:"basexml", type:"xml" } );
-basexmlloader.add(baseurl + "fmblandet/alle", { id:"defaultmediaboxcontent", type:"xml" } );
+basexmlloader.add(baseurl + startxml, { id:"basexml", type:"xml" } );
+basexmlloader.add(baseurl + defaultxml, { id:"defaultmediaboxcontent", type:"xml" } );
 basexmlloader.addEventListener(BulkProgressEvent.COMPLETE, onAllItemsloaded);
 basexmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
 basexmlloader.addEventListener(BulkLoader.ERROR, onError);
