@@ -4,19 +4,16 @@ package core
 
 import br.com.stimuli.loading.BulkLoader;
 import br.com.stimuli.loading.BulkProgressEvent;
+import com.google.analytics.AnalyticsTracker;
+import com.google.analytics.GATracker;
 import components.Mediabox_beta2.Mediabox;
 import flash.display.MovieClip;
 import flash.events.ErrorEvent;
 import flash.events.Event;
-import flash.text.TextField;
-import flash.text.TextFieldAutoSize;
-import flash.text.TextFormat;
-import utilis.xml.Htmldecoder;
 import flash.events.MouseEvent;
 import flash.net.navigateToURL;
 import flash.net.URLRequest;
-import com.google.analytics.AnalyticsTracker;
-import com.google.analytics.GATracker;
+import flash.text.TextField;
 
 
 
