@@ -75,7 +75,7 @@ package core
 			if (test)
 			{
 				baseurl = "http://udvikling.cyberhus.dk/";
-				var startxml:String = "fmitems/276";
+				var startxml:String = "fmitems/1053";
 				var defaultxml:String = "fmblandet/alle";
 			}else {
 				baseurl = ExternalInterface.call("baseurl");

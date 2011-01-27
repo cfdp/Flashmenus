@@ -84,7 +84,6 @@ package core
 				fmswfContainer.filters = [staticGlow];
 				fmswfContainer.addChild(movieclipArray[i]);
 				addChild(fmswfContainer);
-				
 				fmswfContainer.addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);
 				fmswfContainer.addEventListener(MouseEvent.CLICK, containerClickHandler);
 			}
@@ -205,6 +204,10 @@ package core
 		//Setting text in mediabox when user clicks det link on the hoverbox
 		private function setLatestText():void
 		{
+			TextField(mediabox.msgarea.messagecontainer).text = "";
+			MovieClip(mediabox.textitem1).visible = true;
+			MovieClip(mediabox.textitem2).visible = true;
+			MovieClip(mediabox.textitem3).visible = true;
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
 
