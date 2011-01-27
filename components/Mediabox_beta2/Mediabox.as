@@ -75,11 +75,11 @@ package components.Mediabox_beta2
 		}
 		private function mouseDrag (e:MouseEvent):void
 		{
-			MovieClip(e.target).startDrag();
+			//MovieClip(this).startDrag();
 		}
 		private function mousestopDrag(e:MouseEvent):void
 		{
-			MovieClip(e.target).stopDrag();
+			//MovieClip(this).stopDrag();
 		}
 		//mouse event when client click the itembox
 		private function mouseclickItembox (e:MouseEvent):void

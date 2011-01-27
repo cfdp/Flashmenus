@@ -13,6 +13,7 @@ package core
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
 	import utilis.xml.Htmldecoder;
+	import flash.filters.GlowFilter;
 
 	import flash.text.TextField;
 
@@ -57,6 +58,12 @@ package core
 			latestXmlloader = new BulkLoader("latestinroom");
 			latestXmlIdArray.push("empty");
 			latestXmlobjArray.push("empty");
+			var staticGlow:GlowFilter = new GlowFilter();
+			staticGlow.color = 0xfff300;
+			staticGlow.alpha = 0.6;
+			staticGlow.strength = 3;
+			staticGlow.blurX = 5;
+			staticGlow.blurY = 5;
 
 			
 			
@@ -74,13 +81,13 @@ package core
 				fmswfContainer.buttonMode = true;
 				fmswfContainer.useHandCursor = true;
 				fmswfContainer.mouseChildren = false;
+				fmswfContainer.filters = [staticGlow];
 				fmswfContainer.addChild(movieclipArray[i]);
 				addChild(fmswfContainer);
 				
 				fmswfContainer.addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);
 				fmswfContainer.addEventListener(MouseEvent.CLICK, containerClickHandler);
 			}
-			trace(mediabox.hitTestObject(fmswfContainer));
 			if (mediabox.hitTestObject(fmswfContainer))
 			{
 				var num:Number = 424;
@@ -104,7 +111,7 @@ package core
 				Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 				Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
 				linkbox.mc_room.toroom.text = "" + event.target.name;
-				linkbox.mc_latest.latest.text = "Seneste nyheder";
+				linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
 			}else {
 					movieclipId = event.target.name;
 					linkbox = new Hoverbox(movieclipId,dataObject,baseurl);
@@ -112,7 +119,7 @@ package core
 					Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 					Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
 					linkbox.mc_room.toroom.text = "" + event.target.name;
-					linkbox.mc_latest.latest.text = "Seneste nyheder";
+					linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
 					linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
 					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
 					addChild(linkbox);
