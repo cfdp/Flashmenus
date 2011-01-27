@@ -56,7 +56,7 @@ package core
 		public function Flashmenu() 
 		{
 			//Google analytics tracker object.
-			tracker = new GATracker(this, "UA-2898416-1", "AS3", true);
+			tracker = new GATracker(this, "UA-2898416-1", "AS3", false);
 			
 			//start loading the base xml file
 			loadxml();
@@ -70,12 +70,22 @@ package core
 		//loading the base xml for the menu
 		private function loadxml():void
 		{
+			//for offline testing/debugging
+			var test:Boolean = true;
+			if (test)
+			{
+				baseurl = "http://udvikling.cyberhus.dk/";
+				var startxml:String = "fmitems/276";
+				var defaultxml:String = "fmblandet/alle";
+			}else {
+				baseurl = ExternalInterface.call("baseurl");
+				startxml = ExternalInterface.call("startxml");
+				defaultxml = ExternalInterface.call("defaultxml");
+			}
+			// end of test stament
 
 			
 			
-			baseurl = ExternalInterface.call("basexml");
-			var startxml:String = ExternalInterface.call("startxml");
-			var defaultxml:String = ExternalInterface.call("defaultxml");
 			basexmlloader = new BulkLoader("main-site");
 			basexmlloader.add(baseurl + startxml, { id:"basexml", type:"xml" } );
 			basexmlloader.add(baseurl + defaultxml, { id:"defaultmediaboxcontent", type:"xml" } );

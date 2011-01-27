@@ -116,14 +116,16 @@ package core
 		 * */
 		private function latestClickHandler(e:MouseEvent):void
 		{
+			
 			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
+			
 			
 			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
 			
 			if (checkId())
 			{
 				setLatestText();
-			}else if (mediacontenturl != null) {
+			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
 				
 	
 			latestXmlIdArray.push(movieclipId);
@@ -138,7 +140,7 @@ package core
 			MovieClip(mediabox.textitem1).visible = false;
 			MovieClip(mediabox.textitem2).visible = false;
 			MovieClip(mediabox.textitem3).visible = false;
-			TextField(mediabox.msgarea.messagecontainer).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
+			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
 				
 			}
 			
