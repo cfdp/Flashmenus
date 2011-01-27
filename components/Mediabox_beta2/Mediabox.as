@@ -59,20 +59,6 @@ package components.Mediabox_beta2
 			itembox2.addEventListener(MouseEvent.CLICK, mouseclickItembox);
 			itembox3.addEventListener(MouseEvent.CLICK, mouseclickItembox);
 			
-			//ungeblog and starway setup
-			starway = sway;
-			ungeblog = ublog;
-			
-			starway.buttonMode = true;
-			starway.useHandCursor = true;
-			starway.mouseChildren = false;
-			
-			ungeblog.buttonMode = true;
-			ungeblog.useHandCursor = true;
-			ungeblog.mouseChildren = false;
-			
-			starway.addEventListener(MouseEvent.CLICK, mouseclickUngeStar);
-			ungeblog.addEventListener(MouseEvent.CLICK, mouseclickUngeStar);
 			
 
 			titletext = titlename;
@@ -80,22 +66,14 @@ package components.Mediabox_beta2
 			titletext.autoSize = TextFieldAutoSize.CENTER;
 			titletext.defaultTextFormat = tf;
 			titletext.text = "Henter elementer 0 / 00";
-			
-			
-			
-
-			
+	
 		}
 		//mouse event when client click the itembox
 		private function mouseclickItembox (e:MouseEvent):void
 		{
 			
 		}
-		// eventhandler for starway and ungeblog movieclip
-		private function mouseclickUngeStar (e:MouseEvent):void
-		{
-			
-		}
+
 		//functions for setting up text for the item text fields.
 		public function setTextitem0(headline:String,date:String,type:String):void
 		{

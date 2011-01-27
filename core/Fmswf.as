@@ -144,7 +144,7 @@ package core
 			
 		}
 
-		//check the id of the hoverbox so the xml only gets loaded one time
+		
 
 		private function onError (e:ErrorEvent):void
 		{
@@ -154,6 +154,7 @@ package core
 			TextField(mediabox.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 
+		//check the id of the hoverbox so the xml only gets loaded one time
 		private function checkId():Boolean
 		{
 			if (latestXmlIdArray[latestXmlIdArray.indexOf(movieclipId)] === movieclipId)
@@ -185,6 +186,7 @@ package core
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
 
 				TextField(mediabox.titlename).text = movieclipId;
+				TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
 				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
 				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
 				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);

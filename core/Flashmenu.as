@@ -49,6 +49,7 @@ package core
 		private var defaultxml:XML;
 		private var movieclipArray:Array;
 		private var tracker:AnalyticsTracker;
+		import flash.external.ExternalInterface;
 
 
 		//contstructor 
@@ -72,11 +73,12 @@ package core
 
 			
 			
-			baseurl = "http://udvikling.cyberhus.dk/";
-			var xmlUrl:String = baseurl + "fmitems/1053";
+			baseurl = ExternalInterface.call("basexml");
+			var startxml:String = ExternalInterface.call("startxml");
+			var defaultxml:String = ExternalInterface.call("defaultxml");
 			basexmlloader = new BulkLoader("main-site");
-			basexmlloader.add(xmlUrl, { id:"basexml", type:"xml" } );
-			basexmlloader.add(baseurl + "fmblandet/alle", { id:"defaultmediaboxcontent", type:"xml" } );
+			basexmlloader.add(baseurl + startxml, { id:"basexml", type:"xml" } );
+			basexmlloader.add(baseurl + defaultxml, { id:"defaultmediaboxcontent", type:"xml" } );
 			basexmlloader.addEventListener(BulkProgressEvent.COMPLETE, onAllItemsloaded);
 			basexmlloader.addEventListener(BulkProgressEvent.PROGRESS, allRoomProgress);
 			basexmlloader.addEventListener(BulkLoader.ERROR, onError);
