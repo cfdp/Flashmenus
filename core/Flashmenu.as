@@ -71,7 +71,7 @@ package core
 		private function loadxml():void
 		{
 			//for offline testing/debugging
-			var test:Boolean = true;
+			var test:Boolean = false;
 			if (test)
 			{
 				baseurl = "http://udvikling.cyberhus.dk/";
