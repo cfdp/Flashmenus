@@ -54,6 +54,7 @@ package core
 		//contstructor 
 		public function Flashmenu() 
 		{
+			//Google analytics tracker object.
 			tracker = new GATracker(this, "UA-2898416-1", "AS3", true);
 			
 			//start loading the base xml file
