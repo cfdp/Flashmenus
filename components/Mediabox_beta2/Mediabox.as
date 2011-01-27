@@ -66,7 +66,20 @@ package components.Mediabox_beta2
 			titletext.autoSize = TextFieldAutoSize.CENTER;
 			titletext.defaultTextFormat = tf;
 			titletext.text = "Henter elementer 0 / 00";
+			
+			this.addEventListener(MouseEvent.MOUSE_DOWN, mouseDrag);
+			this.addEventListener(MouseEvent.MOUSE_UP, mousestopDrag);
+			
+			
 	
+		}
+		private function mouseDrag (e:MouseEvent):void
+		{
+			MovieClip(e.target).startDrag();
+		}
+		private function mousestopDrag(e:MouseEvent):void
+		{
+			MovieClip(e.target).stopDrag();
 		}
 		//mouse event when client click the itembox
 		private function mouseclickItembox (e:MouseEvent):void

@@ -12,6 +12,7 @@ package core
 	import caurina.transitions.Tweener;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
+	import utilis.xml.Htmldecoder;
 
 	import flash.text.TextField;
 
@@ -79,6 +80,15 @@ package core
 				fmswfContainer.addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);
 				fmswfContainer.addEventListener(MouseEvent.CLICK, containerClickHandler);
 			}
+			trace(mediabox.hitTestObject(fmswfContainer));
+			if (mediabox.hitTestObject(fmswfContainer))
+			{
+				var num:Number = 424;
+				Tweener.addTween(mediabox, { x:num, time:3 } );
+			}else{
+			
+				
+			}
 			
 			
 		}
@@ -93,7 +103,7 @@ package core
 				linkbox.setId(movieclipId);
 				Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 				Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
-				linkbox.mc_room.toroom.text = "Til " + event.target.name;
+				linkbox.mc_room.toroom.text = "" + event.target.name;
 				linkbox.mc_latest.latest.text = "Seneste nyheder";
 			}else {
 					movieclipId = event.target.name;
@@ -101,7 +111,7 @@ package core
 					linkbox.addEventListener(Event.ADDED_TO_STAGE, hoverboxAddedHandler);
 					Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
 					Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
-					linkbox.mc_room.toroom.text = "Til " + event.target.name;
+					linkbox.mc_room.toroom.text = "" + event.target.name;
 					linkbox.mc_latest.latest.text = "Seneste nyheder";
 					linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
 					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
@@ -140,6 +150,8 @@ package core
 			MovieClip(mediabox.textitem1).visible = false;
 			MovieClip(mediabox.textitem2).visible = false;
 			MovieClip(mediabox.textitem3).visible = false;
+			TextField(mediabox.msgarea.messagecontainer).multiline = true;
+			TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
 			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
 			TextField(mediabox.titlename).text = movieclipId;
 			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
@@ -238,6 +250,35 @@ package core
 		{
 			return dataObject..node.length();
 		}
+   /**
+     * This method strips all the html tags (excepts those specifically allowed) 
+     * from a String and returns the results.
+     * 
+     * <p>The second param allows for certain tags not to be stripped from the string
+     * and are formatted as a String: <code>"<p><b><br>"</code>. This method has the same
+     * API as PHP's <code>strip_tags</code> method.</p>
+     *
+     * @param str The String to strip it's tags
+     * @param tags A string of tags allowed
+     * @return A new string with the tags stripped
+     */
+    public function stripTags(str:String, tags:String=null):String
+    {
+        var pattern:RegExp = /<[^>]*>/gim;
+        
+        if (tags != null)
+        {
+            var getChars:RegExp = /(<)([^>]*)(>)/gim;
+            var stripPattern:String = tags.replace(getChars, "$2|");
+            stripPattern = stripPattern.substr(0, -1);
+            stripPattern = "<(?!/?("+stripPattern+")(?=[^a-zA-Z0-9]))[^>]*/?>";
+            pattern = new RegExp( stripPattern, "gim");
+        }
+        
+        return str.replace(pattern, "");
+    }
+
+
 		
 	}
 

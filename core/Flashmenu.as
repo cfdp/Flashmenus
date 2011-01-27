@@ -70,8 +70,8 @@ package core
 		//loading the base xml for the menu
 		private function loadxml():void
 		{
-			//for offline testing/debugging
-			var test:Boolean = false;
+			//for offline testing/debugging in a lokal environment set test varibel to true
+			var test:Boolean = true;
 			if (test)
 			{
 				baseurl = "http://udvikling.cyberhus.dk/";
@@ -136,11 +136,13 @@ package core
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
 				movieclipArray.push(roomxmlloader.getMovieClip("roomswf" + i));
+				
 			}
 			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj);
 			addChild(placeFmswf);
 			mediaobj.titlename.text = "Ungeblogs";
 			mediaobj.undertitle.text = "Sundhed og velvære";
+			
 			
 
 		}
