@@ -1,4 +1,4 @@
-package core 
+﻿package core 
 {
 	
 	
@@ -71,7 +71,7 @@ package core
 		private function loadxml():void
 		{
 			//for offline testing/debugging in a lokal environment set test varibel to true
-			var test:Boolean = false;
+			var test:Boolean = true;
 			if (test)
 			{
 				baseurl = "http://udvikling.cyberhus.dk/";

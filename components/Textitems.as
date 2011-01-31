@@ -37,7 +37,7 @@ package components
 			textformat.bold = false;
 			textformat.size = 9;
 			textformat.font = "Verdana";
-			textformat.color = 0x823F0A;
+			textformat.color = 0x666666;
 			
 			headlineTextformat = new TextFormat();
 			headlineTextformat.color = 0xE48515;

@@ -81,7 +81,7 @@ package core
 				fmswfContainer.buttonMode = true;
 				fmswfContainer.useHandCursor = true;
 				fmswfContainer.mouseChildren = false;
-				fmswfContainer.filters = [staticGlow];
+				//fmswfContainer.filters = [staticGlow];
 				fmswfContainer.addChild(movieclipArray[i]);
 				addChild(fmswfContainer);
 				fmswfContainer.addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);
@@ -103,26 +103,59 @@ package core
 		 * if there are one only add trasition and text*/
 		private function fmswfContainerMouseOver (event:MouseEvent):void
 		{
+			movieclipId = event.target.name;
+			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
+			
+			
+			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
+			
+			if (checkId())
+			{
+				setLatestText();
+			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
+				
+	
+			latestXmlIdArray.push(movieclipId);
+			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
+			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
+			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
+			latestXmlloader.start();
+				
+
+			}else {
+			
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			TextField(mediabox.msgarea.messagecontainer).multiline = true;
+			TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
+			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
+			TextField(mediabox.titlename).text = movieclipId;
+			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
+				
+			}
+			/**
 			if (hoverboxExcist)
 			{
 				movieclipId = event.target.name;
 				linkbox.setId(movieclipId);
-				Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
-				Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
+				Tweener.addTween(linkbox, { x:event.target.x, time:0.5, transition:"easeOutSine" } );
+				Tweener.addTween(linkbox, { y:event.target.y, time:0.5, transition:"easeOutSine" } );
 				linkbox.mc_room.toroom.text = "" + event.target.name;
 				linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
 			}else {
 					movieclipId = event.target.name;
 					linkbox = new Hoverbox(movieclipId,dataObject,baseurl);
 					linkbox.addEventListener(Event.ADDED_TO_STAGE, hoverboxAddedHandler);
-					Tweener.addTween(linkbox, { x:mouseX, time:0.5, transition:"easeOutSine" } );
-					Tweener.addTween(linkbox, { y:mouseY-5, time:0.5, transition:"easeOutSine" } );
+					Tweener.addTween(linkbox, { x:event.target.x, time:0.5, transition:"easeOutSine" } );
+					Tweener.addTween(linkbox, { y:event.target.y, time:0.5, transition:"easeOutSine" } );
 					linkbox.mc_room.toroom.text = "" + event.target.name;
 					linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
 					linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
 					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
 					addChild(linkbox);
 				}
+				*/
 			
 		}
 		/*Function to handel loading of text for the mediabox
@@ -249,10 +282,10 @@ package core
 		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
-			MovieClip(linkbox.mc_room).visible = false;
-			MovieClip(linkbox.mc_latest).visible = false;
-			MovieClip(linkbox.preloader_circle).visible = true;
-			MovieClip(linkbox.preloader_circle.bar).gotoAndPlay(2);
+			//MovieClip(linkbox.mc_room).visible = false;
+			//MovieClip(linkbox.mc_latest).visible = false;
+			//MovieClip(linkbox.preloader_circle).visible = true;
+			//MovieClip(linkbox.preloader_circle.bar).gotoAndPlay(2);
 			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"_self");
 		}
 		private function hoverboxAddedHandler (e:Event):void
