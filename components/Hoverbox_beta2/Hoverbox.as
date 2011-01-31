@@ -30,17 +30,18 @@ package components.Hoverbox_beta2
 			movieclipId = id;
 			xmlObject = xmlobj;
 			baseurl = burl;
+			MovieClip(preloader_circle).visible = false;
 		}
 		//setting up the text and textfields
 		private function setupTextfields():void
 		{
 			textformat = new TextFormat();
 			textformat.font = "Verdana";
-			textformat.color = 0x000000;
+			textformat.color = 0x823F0A;
 			textformat.size = 9;
 			
 			tf = new TextFormat();
-			tf.color = 0x00A7FF;
+			tf.color = 0xE48515;
 			
 			latestpost = mc_latest.latest;
 			mcLatestpost = mc_latest;
@@ -81,21 +82,22 @@ package components.Hoverbox_beta2
 		private function roommouseoverHandler(e:MouseEvent):void
 		{
 			
+			MovieClip(arrow_upper).gotoAndStop(1);
 			getRoom.setTextFormat(tf);
 		}
 		private function roommouseoutHandler(e:MouseEvent):void
 		{
-			
+			MovieClip(arrow_upper).gotoAndStop(2);
 			getRoom.setTextFormat(textformat);
 		}
 		private function latestmouseoverHandler(e:MouseEvent):void
 		{
-			
+			MovieClip(arrow_lower).gotoAndStop(1);
 			latestpost.setTextFormat(tf);
 		}
 		private function latestmouseoutHandler(e:MouseEvent):void
 		{
-			
+			MovieClip(arrow_lower).gotoAndStop(2);
 			latestpost.setTextFormat(textformat);
 		}
 		//public function to set the id of the hoverbox

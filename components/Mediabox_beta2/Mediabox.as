@@ -43,6 +43,7 @@ package components.Mediabox_beta2
 			tf.bold = true;
 			tf.size = 12;
 			tf.font = "Verdana";
+			tf.color = 0x000000;
 			
 			_tf = new TextFormat();
 			_tf.bold = true;

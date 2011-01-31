@@ -249,6 +249,10 @@ package core
 		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
+			MovieClip(linkbox.mc_room).visible = false;
+			MovieClip(linkbox.mc_latest).visible = false;
+			MovieClip(linkbox.preloader_circle).visible = true;
+			MovieClip(linkbox.preloader_circle.bar).gotoAndPlay(2);
 			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"_self");
 		}
 		private function hoverboxAddedHandler (e:Event):void

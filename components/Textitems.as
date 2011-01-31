@@ -31,15 +31,16 @@ package components
 			tf.bold = true;
 			tf.size = 10;
 			tf.font = "Verdana";
-			tf.color = 0x000000;
+			tf.color = 0x823F0A;
 			
 			var textformat:TextFormat = new TextFormat();
 			textformat.bold = false;
 			textformat.size = 9;
 			textformat.font = "Verdana";
+			textformat.color = 0x823F0A;
 			
 			headlineTextformat = new TextFormat();
-			headlineTextformat.color = 0x00A7FF;
+			headlineTextformat.color = 0xE48515;
 			
 			_headline = headline;
 			
