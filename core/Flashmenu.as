@@ -64,12 +64,16 @@
 			mediaobj.x = 20;
 			mediaobj.y = 20;
 			addChild(mediaobj);
+			//mediaobj.preloader.bar.scaleX = 0;
+			mediaobj.preloader._txt.visible = false;
+			
 
 			
 		}
 		//loading the base xml for the menu
 		private function loadxml():void
 		{
+			
 			//for offline testing/debugging in a lokal environment set test varibel to true
 			var test:Boolean = true;
 			if (test)
@@ -102,6 +106,10 @@
 		 */
 		private function onAllItemsloaded (e:Event):void
 		{
+			MovieClip(mediaobj.textitem1).visible = false;
+			MovieClip(mediaobj.textitem2).visible = false;
+			MovieClip(mediaobj.textitem3).visible = false;
+			
 			basexml = basexmlloader.getXML("basexml");
 			
 			defaultxml = basexmlloader.getXML("defaultmediaboxcontent");
@@ -132,6 +140,7 @@
 		 * push the swf in a array container*/
 		private function allRoomItemsLoaded(e:Event):void
 		{
+			MovieClip(mediaobj.preloader).visible = false;
 			movieclipArray = new Array();
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
@@ -142,6 +151,9 @@
 			addChild(placeFmswf);
 			mediaobj.titlename.text = "Ungeblogs";
 			mediaobj.undertitle.text = "Sundhed og velvære";
+			MovieClip(mediaobj.textitem1).visible = true;
+			MovieClip(mediaobj.textitem2).visible = true;
+			MovieClip(mediaobj.textitem3).visible = true;
 			
 			
 
@@ -149,6 +161,7 @@
 		/*passses the progress information to the mediabox so the user can follow and see the progress*/
 		private function allRoomProgress(e:BulkProgressEvent):void
 		{
+
 			
 			mediaobj.titlename.text = "Henter elementer " + e.itemsLoaded + " / " + e.itemsTotal;
 			
@@ -166,6 +179,15 @@
 		 * */
 		private function setupMediaText():void
 		{
+			if (defaultxml..node.length() <= 1)
+			{
+				MovieClip(mediaobj.textitem1).visible = false;
+				MovieClip(mediaobj.textitem2).visible = false;
+				MovieClip(mediaobj.textitem3).visible = false;
+				TextField(mediaobj.msgarea.messagecontainer).htmlText = "Ingen data til rådighed";
+				
+			}else
+			{
 			
 
 			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
@@ -174,7 +196,7 @@
 			MovieClip(mediaobj.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
 			MovieClip(mediaobj.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
 			MovieClip(mediaobj.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
-			
+			}
 
 		}
 		private function textitem1clickhandler(e:MouseEvent):void

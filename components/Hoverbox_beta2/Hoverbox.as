@@ -30,7 +30,7 @@ package components.Hoverbox_beta2
 			movieclipId = id;
 			xmlObject = xmlobj;
 			baseurl = burl;
-			MovieClip(preloader_circle).visible = false;
+			//MovieClip(preloader_circle).visible = false;
 		}
 		//setting up the text and textfields
 		private function setupTextfields():void
@@ -49,7 +49,7 @@ package components.Hoverbox_beta2
 			mcGetroom = mc_room;
 			
 			latestpost.selectable = false;
-			latestpost.autoSize = TextFieldAutoSize.LEFT;
+			//latestpost.autoSize = TextFieldAutoSize.LEFT;
 			latestpost.defaultTextFormat = textformat;
 			mcLatestpost.buttonMode = true;
 			mcLatestpost.useHandCursor = true;
@@ -60,7 +60,7 @@ package components.Hoverbox_beta2
 			
 			
 			getRoom.selectable = false;
-			getRoom.autoSize = TextFieldAutoSize.LEFT;
+			//getRoom.autoSize = TextFieldAutoSize.LEFT;
 			getRoom.defaultTextFormat = textformat;
 			mcGetroom.buttonMode = true;
 			mcGetroom.useHandCursor = true;

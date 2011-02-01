@@ -65,11 +65,6 @@ package core
 			staticGlow.blurX = 5;
 			staticGlow.blurY = 5;
 
-			
-			
-			
-			
-			
 			//for loop for generating the fmswf's and placing them on stage
 			for (var i:Number = 0; i <countMenuItems; i++)
 			{
@@ -91,50 +86,20 @@ package core
 			{
 				var num:Number = 424;
 				Tweener.addTween(mediabox, { x:num, time:3 } );
-			}else{
-			
 				
+			}else
+			{
+	
 			}
-			
-			
-		}
+			}
+	
+		
 
 		/*Check to see if there is more than one instance of the hoverbox
 		 * if there are one only add trasition and text*/
 		private function fmswfContainerMouseOver (event:MouseEvent):void
 		{
-			movieclipId = event.target.name;
-			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
-			
-			
-			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
-			
-			if (checkId())
-			{
-				setLatestText();
-			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
-				
-	
-			latestXmlIdArray.push(movieclipId);
-			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
-			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
-			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
-			latestXmlloader.start();
-				
 
-			}else {
-			
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
-			TextField(mediabox.msgarea.messagecontainer).multiline = true;
-			TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
-			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
-			TextField(mediabox.titlename).text = movieclipId;
-			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
-				
-			}
-			/**
 			if (hoverboxExcist)
 			{
 				movieclipId = event.target.name;
@@ -142,21 +107,22 @@ package core
 				Tweener.addTween(linkbox, { x:event.target.x, time:0.5, transition:"easeOutSine" } );
 				Tweener.addTween(linkbox, { y:event.target.y, time:0.5, transition:"easeOutSine" } );
 				linkbox.mc_room.toroom.text = "" + event.target.name;
-				linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
-			}else {
-					movieclipId = event.target.name;
-					linkbox = new Hoverbox(movieclipId,dataObject,baseurl);
-					linkbox.addEventListener(Event.ADDED_TO_STAGE, hoverboxAddedHandler);
-					Tweener.addTween(linkbox, { x:event.target.x, time:0.5, transition:"easeOutSine" } );
-					Tweener.addTween(linkbox, { y:event.target.y, time:0.5, transition:"easeOutSine" } );
-					linkbox.mc_room.toroom.text = "" + event.target.name;
-					linkbox.mc_latest.latest.text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
-					linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
-					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
-					addChild(linkbox);
-				}
-				*/
-			
+				setlatestTxt();
+				
+			}else 
+			{
+				movieclipId = event.target.name;
+				linkbox = new Hoverbox(movieclipId,dataObject,baseurl);
+				linkbox.addEventListener(Event.ADDED_TO_STAGE, hoverboxAddedHandler);
+				Tweener.addTween(linkbox, { x:event.target.x, time:0.5, transition:"easeOutSine" } );
+				Tweener.addTween(linkbox, { y:event.target.y, time:0.5, transition:"easeOutSine" } );
+				linkbox.mc_room.toroom.text = "" + event.target.name;
+				setlatestTxt();
+				linkbox.mc_latest.addEventListener(MouseEvent.CLICK, latestClickHandler);
+				linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
+				addChild(linkbox);
+			}
+
 		}
 		/*Function to handel loading of text for the mediabox
 		 * it checks the id first to see if the xml object excist
@@ -165,41 +131,48 @@ package core
 		 * */
 		private function latestClickHandler(e:MouseEvent):void
 		{
-			
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+
+			MovieClip(mediabox.preloader).visible = true;
+
 			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
-			
-			
+
 			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
 			
 			if (checkId())
 			{
+				TextField(mediabox.msgarea.messagecontainer).visible = false;
+				MovieClip(mediabox.preloader).visible = false;
 				setLatestText();
-			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
 				
-	
-			latestXmlIdArray.push(movieclipId);
-			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
-			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
-			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
-			latestXmlloader.start();
+			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) 
+			{
+				TextField(mediabox.msgarea.messagecontainer).visible = false;
+				MovieClip(mediabox.textitem1).visible = false;
+				MovieClip(mediabox.textitem2).visible = false;
+				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.preloader).visible = true;
+				latestXmlIdArray.push(movieclipId);
+				latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
+				latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
+				latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
+				latestXmlloader.start();
 				
 
-			}else {
-			
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
-			TextField(mediabox.msgarea.messagecontainer).multiline = true;
-			TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
-			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
-			TextField(mediabox.titlename).text = movieclipId;
-			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
-				
+			}else 
+			{
+				TextField(mediabox.msgarea.messagecontainer).visible = true;
+				MovieClip(mediabox.textitem1).visible = false;
+				MovieClip(mediabox.textitem2).visible = false;
+				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.preloader).visible = false;
+				TextField(mediabox.msgarea.messagecontainer).multiline = true;
+				TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
+				TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
+				TextField(mediabox.titlename).text = movieclipId;
+				TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;	
 			}
-			
 		}
-
-		
 
 		private function onError (e:ErrorEvent):void
 		{
@@ -215,19 +188,21 @@ package core
 			if (latestXmlIdArray[latestXmlIdArray.indexOf(movieclipId)] === movieclipId)
 			{
 				return true;
-			}else {
-				return false;
 				
+			}else 
+			{
+				return false;	
 			}
-			
-			
+	
 		}
 		/*if the xmlobject is loaded is puts it in a array and setup the text
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
-			
-
+			MovieClip(mediabox.textitem1).visible = true;
+			MovieClip(mediabox.textitem2).visible = true;
+			MovieClip(mediabox.textitem3).visible = true;
+			MovieClip(mediabox.preloader).visible = false;
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
@@ -243,20 +218,15 @@ package core
 			MovieClip(mediabox.textitem3).visible = true;
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
+			TextField(mediabox.titlename).text = movieclipId;
+			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
+			mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
+			mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
+			mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
+			MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+			MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+			MovieClip(mediabox.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
 
-				TextField(mediabox.titlename).text = movieclipId;
-				TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
-				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
-				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
-				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
-				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
-				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
-				MovieClip(mediabox.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
-				
-				
-
-			
-			
 		}
 		private function textitem1clickhandler(e:MouseEvent):void
 		{
@@ -292,39 +262,22 @@ package core
 		{
 			hoverboxExcist = stage.contains(linkbox);
 		}
+		
 		//counting the nodes  so i know how many swf to generate in my for loop.
 		private function get countMenuItems():Number
 		{
 			return dataObject..node.length();
 		}
-   /**
-     * This method strips all the html tags (excepts those specifically allowed) 
-     * from a String and returns the results.
-     * 
-     * <p>The second param allows for certain tags not to be stripped from the string
-     * and are formatted as a String: <code>"<p><b><br>"</code>. This method has the same
-     * API as PHP's <code>strip_tags</code> method.</p>
-     *
-     * @param str The String to strip it's tags
-     * @param tags A string of tags allowed
-     * @return A new string with the tags stripped
-     */
-    public function stripTags(str:String, tags:String=null):String
-    {
-        var pattern:RegExp = /<[^>]*>/gim;
-        
-        if (tags != null)
-        {
-            var getChars:RegExp = /(<)([^>]*)(>)/gim;
-            var stripPattern:String = tags.replace(getChars, "$2|");
-            stripPattern = stripPattern.substr(0, -1);
-            stripPattern = "<(?!/?("+stripPattern+")(?=[^a-zA-Z0-9]))[^>]*/?>";
-            pattern = new RegExp( stripPattern, "gim");
-        }
-        
-        return str.replace(pattern, "");
-    }
 
+		private function setlatestTxt():void
+		{
+			
+			TextField(linkbox.mc_latest.latest).text = "" + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_fm_read_more;
+			if (TextField(linkbox.mc_latest.latest).textWidth > 85)
+			{
+				TextField(linkbox.mc_latest.latest).replaceText(28, 200,".");
+			}
+		}
 
 		
 	}
