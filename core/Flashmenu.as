@@ -147,7 +147,7 @@
 				movieclipArray.push(roomxmlloader.getMovieClip("roomswf" + i));
 				
 			}
-			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj);
+			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj,tracker);
 			addChild(placeFmswf);
 			mediaobj.titlename.text = "Ungeblogs";
 			mediaobj.undertitle.text = "Sundhed og velvære";

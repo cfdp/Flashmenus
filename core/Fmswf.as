@@ -3,6 +3,8 @@ package core
 	
 	import br.com.stimuli.loading.BulkLoader;
 	import br.com.stimuli.loading.BulkProgressEvent;
+	import com.google.analytics.AnalyticsTracker;
+	import com.google.analytics.GATracker;
 	import components.Hoverbox_beta2.Hoverbox;
 	import components.Mediabox_beta2.Mediabox;
 	import flash.display.Sprite;
@@ -14,6 +16,7 @@ package core
 	import flash.net.URLRequest;
 	import utilis.xml.Htmldecoder;
 	import flash.filters.GlowFilter;
+	
 
 	import flash.text.TextField;
 
@@ -42,11 +45,15 @@ package core
 		private var latestXmlobjArray:Array;
 		private var latestXmlObject:XML;
 		private var mediacontenturl:String;
+		private var tracker:AnalyticsTracker;
 		
 		
 		
-		public function Fmswf(xmlobj:XML,burl:String,mcarray:Array,media:Mediabox) 
+		
+		public function Fmswf(xmlobj:XML,burl:String,mcarray:Array,media:Mediabox,gatracker:AnalyticsTracker) 
 		{
+			tracker = gatracker;
+			
 			dataObject = xmlobj;
 			baseurl = burl;
 			movieclipArray = mcarray;
@@ -131,6 +138,7 @@ package core
 		 * */
 		private function latestClickHandler(e:MouseEvent):void
 		{
+			tracker.trackPageview("/flashclick");
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
 
 			MovieClip(mediabox.preloader).visible = true;
@@ -199,6 +207,7 @@ package core
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
+			
 			MovieClip(mediabox.textitem1).visible = true;
 			MovieClip(mediabox.textitem2).visible = true;
 			MovieClip(mediabox.textitem3).visible = true;
@@ -230,14 +239,29 @@ package core
 		}
 		private function textitem1clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[0].nid),"_self");
 		}
 		private function textitem2clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[1].nid),"_self");
 		}
 		private function textitem3clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[2].nid),"_self");
 		}
 		/*Function to convert the unixtime stamp into a date object*/
@@ -252,10 +276,11 @@ package core
 		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
-			//MovieClip(linkbox.mc_room).visible = false;
-			//MovieClip(linkbox.mc_latest).visible = false;
-			//MovieClip(linkbox.preloader_circle).visible = true;
-			//MovieClip(linkbox.preloader_circle.bar).gotoAndPlay(2);
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"_self");
 		}
 		private function hoverboxAddedHandler (e:Event):void
