@@ -166,37 +166,47 @@ package core
 		private function latestClickHandler(e:MouseEvent):void
 		{
 			
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+
+			MovieClip(mediabox.preloader).visible = true;
+
 			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
-			
-			
+
 			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
-			
+
 			if (checkId())
 			{
+				TextField(mediabox.msgarea.messagecontainer).visible = false;
+				MovieClip(mediabox.preloader).visible = false;
 				setLatestText();
-			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
-				
-	
-			latestXmlIdArray.push(movieclipId);
-			latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
-			latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
-			latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
-			latestXmlloader.start();
-				
 
-			}else {
-			
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
-			TextField(mediabox.msgarea.messagecontainer).multiline = true;
-			TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
-			TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
-			TextField(mediabox.titlename).text = movieclipId;
-			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
-				
+			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) 
+			{
+				TextField(mediabox.msgarea.messagecontainer).visible = false;
+				MovieClip(mediabox.textitem1).visible = false;
+				MovieClip(mediabox.textitem2).visible = false;
+				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.preloader).visible = true;
+				latestXmlIdArray.push(movieclipId);
+				latestXmlloader.add(mediacontenturl,{id:movieclipId,type:"xml"});
+				latestXmlloader.addEventListener(BulkProgressEvent.COMPLETE, latestItemsloaded);
+				latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
+				latestXmlloader.start();
+
+
+			}else 
+			{
+				TextField(mediabox.msgarea.messagecontainer).visible = true;
+				MovieClip(mediabox.textitem1).visible = false;
+				MovieClip(mediabox.textitem2).visible = false;
+				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.preloader).visible = false;
+				TextField(mediabox.msgarea.messagecontainer).multiline = true;
+				TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
+				TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_revisions_body;
+				TextField(mediabox.titlename).text = movieclipId;
+				TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;	
 			}
-			
 		}
 
 		
@@ -226,8 +236,10 @@ package core
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
-			
-
+			MovieClip(mediabox.textitem1).visible = true;
+			MovieClip(mediabox.textitem2).visible = true;
+			MovieClip(mediabox.textitem3).visible = true;
+			MovieClip(mediabox.preloader).visible = false;
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
@@ -258,16 +270,31 @@ package core
 			
 			
 		}
-		private function textitem1clickhandler(e:MouseEvent):void
+			private function textitem1clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[0].nid),"_self");
 		}
 		private function textitem2clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[1].nid),"_self");
 		}
 		private function textitem3clickhandler(e:MouseEvent):void
 		{
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/"+ latestXmlObject..node[2].nid),"_self");
 		}
 		/*Function to convert the unixtime stamp into a date object*/
@@ -277,15 +304,16 @@ package core
 			newdate.setTime(latestXmlObject..node[num].node_created * 1000);
 			var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
 			return textdate;
-			
+
 		}
 		/*handle the user click in the hoverbox and send the user to a new url*/
 		private function containerClickHandler(e:MouseEvent):void
 		{
-			//MovieClip(linkbox.mc_room).visible = false;
-			//MovieClip(linkbox.mc_latest).visible = false;
-			//MovieClip(linkbox.preloader_circle).visible = true;
-			//MovieClip(linkbox.preloader_circle.bar).gotoAndPlay(2);
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.textitem1).visible = false;
+			MovieClip(mediabox.textitem2).visible = false;
+			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet),"_self");
 		}
 		private function hoverboxAddedHandler (e:Event):void

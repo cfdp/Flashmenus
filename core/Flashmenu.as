@@ -65,6 +65,8 @@
 			mediaobj.x = 20;
 			mediaobj.y = 20;
 			addChild(mediaobj);
+			//mediaobj.preloader.bar.scaleX = 0;
+			//mediaobj.preloader._txt.visible = false;
 
 			
 		}
@@ -133,6 +135,7 @@
 		 * push the swf in a array container*/
 		private function allRoomItemsLoaded(e:Event):void
 		{
+			MovieClip(mediaobj.preloader).visible = false;
 			movieclipArray = new Array();
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
