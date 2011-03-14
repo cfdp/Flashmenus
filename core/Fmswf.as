@@ -107,9 +107,9 @@ package core
 			mediacontenturl = baseurl + dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text;
 			
 			
-			Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
+			//Tweener.addTween(TextField(mediabox.titlename), { x:58, time:1, onComplete:function():void {Tweener.addTween(TextField(mediabox.titlename),{x:8,time:1}) }} );
 			
-			if (checkId())
+			/**if (checkId())
 			{
 				setLatestText();
 			}else if (dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_text != undefined) {
@@ -133,8 +133,8 @@ package core
 			TextField(mediabox.titlename).text = movieclipId;
 			TextField(mediabox.undertitle).text = dataObject..node[movieclipIdArray.indexOf(movieclipId)].node_data_field_text_field_subtitle;
 				
-			}
-			/**
+			}*/
+			
 			if (hoverboxExcist)
 			{
 				movieclipId = event.target.name;
@@ -155,7 +155,7 @@ package core
 					linkbox.mc_room.addEventListener(MouseEvent.CLICK, containerClickHandler);
 					addChild(linkbox);
 				}
-				*/
+				
 			
 		}
 		/*Function to handel loading of text for the mediabox
