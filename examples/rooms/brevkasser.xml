@@ -1,0 +1,27 @@
+
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- generator="Drupal Views_Datasource.Module" --> 
+<nodes> 
+  <node> 
+    <nid><![CDATA[11158]]></nid> 
+    <node_created><![CDATA[1295427693]]></node_created> 
+    <node_title><![CDATA[Et lille tip - gør det selv ]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201101191001]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[10820]]></nid> 
+    <node_created><![CDATA[1292506620]]></node_created> 
+    <node_title><![CDATA[Plej dine smykker]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201012161437]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[10819]]></nid> 
+    <node_created><![CDATA[1292506226]]></node_created> 
+    <node_title><![CDATA[Plej dine smykker]]></node_title> 
+    <node_language><![CDATA[da]]></node_language> 
+    <node_type><![CDATA[link_artikel]]></node_type> 
+    <node_created_minute><![CDATA[201012161430]]></node_created_minute> 
+  </node> 
+</nodes> 

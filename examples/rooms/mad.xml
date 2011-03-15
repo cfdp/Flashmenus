@@ -1,0 +1,26 @@
+
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- generator="Drupal Views_Datasource.Module" --> 
+<nodes> 
+  <node> 
+    <nid><![CDATA[11155]]></nid> 
+    <node_created><![CDATA[1295426720]]></node_created> 
+    <node_title><![CDATA[Køkkenet takker af]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201101190945]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[11156]]></nid> 
+    <node_created><![CDATA[1295254254]]></node_created> 
+    <node_title><![CDATA[Køkkenet lukker]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201101170950]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[9953]]></nid> 
+    <node_created><![CDATA[1286265676]]></node_created> 
+    <node_title><![CDATA[Stop før 5]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201010050901]]></node_created_minute> 
+  </node> 
+</nodes> 

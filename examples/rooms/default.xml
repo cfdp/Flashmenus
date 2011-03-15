@@ -1,0 +1,26 @@
+
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- generator="Drupal Views_Datasource.Module" --> 
+<nodes> 
+  <node> 
+    <nid><![CDATA[11655]]></nid> 
+    <node_created><![CDATA[1299866129]]></node_created> 
+    <node_title><![CDATA[Et portræt fortæller ikke altid den rigtige historie.]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201103111855]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[11583]]></nid> 
+    <node_created><![CDATA[1299173315]]></node_created> 
+    <node_title><![CDATA[Et portræt kan fortælle meget om et menneske.]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201103031828]]></node_created_minute> 
+  </node> 
+  <node> 
+    <nid><![CDATA[11542]]></nid> 
+    <node_created><![CDATA[1298803197]]></node_created> 
+    <node_title><![CDATA[Tema for Kunstværkstedet: Portræt.]]></node_title> 
+    <node_type><![CDATA[blog]]></node_type> 
+    <node_created_minute><![CDATA[201102271139]]></node_created_minute> 
+  </node> 
+</nodes> 
