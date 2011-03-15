@@ -74,12 +74,12 @@
 		private function loadxml():void
 		{
 			//for offline testing/debugging in a lokal environment set test varibel to true
-			var test:Boolean = true;
+			var test:Boolean = false;
 			if (test)
 			{
-				baseurl = "http://udvikling.cyberhus.dk/";
-				var startxml:String = "fmitems/1053";
-				var defaultxml:String = "fmblandet/alle";
+				baseurl = "http://www.cyberhus.dk/";
+				var startxml:String = "fmitems/273";
+				var defaultxml:String = "fmblandet/281";
 			}else {
 				baseurl = ExternalInterface.call("baseurl");
 				startxml = ExternalInterface.call("startxml");

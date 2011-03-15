@@ -78,6 +78,7 @@ package core
 				movieclipIdArray.push(fmswfContainer.name);
 				fmswfContainer.x = dataObject..node[i].node_data_field_text_field_swf_x;
 				fmswfContainer.y = dataObject..node[i].node_data_field_text_field_swf_y;
+				trace(dataObject..node);
 				fmswfContainer.buttonMode = true;
 				fmswfContainer.useHandCursor = true;
 				fmswfContainer.mouseChildren = false;
