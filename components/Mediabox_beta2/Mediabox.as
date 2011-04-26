@@ -91,7 +91,7 @@ package components.Mediabox_beta2
 		//functions for setting up text for the item text fields.
 		public function setTextitem0(headline:String,date:String,type:String):void
 		{
-			itembox1.headline.htmlText = "<b>" + headline + "</b>";
+			itembox1.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 			if (itembox1.headline.textWidth > 173)
 			{
 				
@@ -101,28 +101,28 @@ package components.Mediabox_beta2
 				itembox1.headline.htmlText = "<b>" + headline + "</b>";
 			}
 			
-			itembox1.type.htmlText = " "+testString(type);
-			itembox1.date.htmlText = date;
+			itembox1.type.htmlText = checkForText(testString(type));
+			itembox1.date.htmlText = checkForText(date);
 
 		}
 		public function setTextitem1(headline:String,date:String,type:String):void
 		{
-			itembox2.headline.htmlText = "<b>" + headline + "</b>";
+			itembox2.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 						if (itembox2.headline.textWidth > 173)
 			{
 				
 				itembox2.headline.replaceText(22, 200, "...");
 				
 			}else{
-				itembox2.headline.htmlText = "<b>" + headline + "</b>";
+				itembox2.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 			}
-			itembox2.type.htmlText = testString(type);
-			itembox2.date.htmlText = date;
+			itembox2.type.htmlText = checkForText(testString(type));
+			itembox2.date.htmlText = checkForText(date);
 		}
 		public function setTextitem2(headline:String,date:String,type:String):void
 		{
 
-			itembox3.headline.htmlText = "<b>" + headline + "</b>";
+			itembox3.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 						if (itembox3.headline.textWidth > 173)
 			{
 				
@@ -131,8 +131,18 @@ package components.Mediabox_beta2
 			}else{
 				itembox3.headline.htmlText = "<b>" + headline + "</b>";
 			}
-			itembox3.type.htmlText = testString(type);
-			itembox3.date.htmlText = date;
+			itembox3.type.htmlText = checkForText(testString(type));
+			itembox3.date.htmlText = checkForText(date);
+		}
+		private function checkForText(text:String):String
+		{
+			var testString:String = text;
+			if (testString == "") {
+				testString = "";
+				return testString;
+			}else {
+				return testString;
+			}
 		}
 
 		//end of functions
@@ -160,6 +170,10 @@ package components.Mediabox_beta2
 				
 				case "page":
 				return "Side";
+				break;
+				
+				case "forum":
+				return "Debatten";
 				break;
 				
 				default:

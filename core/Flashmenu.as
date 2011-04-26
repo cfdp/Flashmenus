@@ -73,9 +73,7 @@
 			MovieClip(mediaobj.textitem2).visible = false;
 			MovieClip(mediaobj.textitem3).visible = false;
 			
-			/** Feedback button
-			 * */
-			SimpleButton(feedback).addEventListener(MouseEvent.CLICK, feedbackClickHandler);
+			
 			
 			
 
@@ -97,20 +95,20 @@
 			 * Lystværelse:	 	 276  movieclip frame name "lyst"
 			 * stue:		 	 272  movieclip frame name "stue"
 			 * Bibliotek:	 	 278  movieclip frame name "Bib"
-			 * Mediehulen:	 	 283  movieclip frame name "Medie"
-			 * Kunstværksted:	 281  movieclip frame name "Kunst"
+			 * Mediehulen:	 	 283  movieclip frame name "medie"
+			 * Kunstværksted:	 281  movieclip frame name "kunst"
 			 * */
-			var test:Boolean = true;
+			var test:Boolean = false;
 			if (test)
 			{
-				baseurl = "http://www.cyberhus.dk/";
-				var startxml:String = "fmitems/281";
-				var defaultxml:String = "fmblandet/281";
-				MovieClip(rum).gotoAndStop("kunst");
+				baseurl = "http://www.reneskou.me/";
+				var startxml:String = "fmitems";
+				var defaultxml:String = "fmblandet";
+				
 				
 				
 			}else {
-				MovieClip(rum).visible = false;
+				
 				baseurl = ExternalInterface.call("baseurl");
 				startxml = ExternalInterface.call("startxml");
 				defaultxml = ExternalInterface.call("defaultxml");
@@ -178,7 +176,7 @@
 			}
 			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj,tracker);
 			addChild(placeFmswf);
-			TextField(mediaobj.titlename).htmlText = changeTitle(basexml..node[1].term_data_name);
+			TextField(mediaobj.titlename).htmlText = "<b>" + changeTitle(basexml..node[1].term_data_name) + "</b>";
 			TextField(mediaobj.undertitle).htmlText = "Seneste nyheder";
 			
 			
@@ -280,13 +278,7 @@
 		{
 			return basexml..node.length();
 		}
-		/** Feedback button
-		 * 	sends the user the the url when the button is clicked
-		 * */
-		private function feedbackClickHandler(e:MouseEvent):void
-		{
-			navigateToURL(new URLRequest("http://www.cyberhus.dk/node/11936"),"_self");
-		}
+
 		}
 
 }

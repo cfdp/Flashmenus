@@ -178,6 +178,7 @@ package core
 			
 			//Setting a glow filter on the title of the mediabox so the alpha value becomes avalible.
 			TextField(mediabox.titlename).filters = [staticGlow];
+			TextField(mediabox.undertitle).filters = [staticGlow];
 			//Google tracker object
 			tracker.trackPageview("hoverbox/" + dataObject..node[itemId.indexOf(movieclipId)].term_data_name + dataObject..node[itemId.indexOf(movieclipId)].node_title);
 
@@ -186,7 +187,8 @@ package core
 			{
 				TextField(mediabox.msgarea.messagecontainer).visible = false;
 				MovieClip(mediabox.preloader).visible = false;
-				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:1} );
+				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:0.1 } );
+				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1} );
 				setLatestText();
 
 			}else if (dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_text != undefined) 
@@ -204,7 +206,8 @@ package core
 				MovieClip(mediabox.textitem2).visible = false;
 				MovieClip(mediabox.textitem3).visible = false;
 				MovieClip(mediabox.preloader).visible = true;
-				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:1} );
+				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:0.1 } );
+				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1} );
 				
 				
 
@@ -219,7 +222,8 @@ package core
 				TextField(mediabox.msgarea.messagecontainer).multiline = true;
 				TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
 				TextField(mediabox.msgarea.messagecontainer).htmlText = dataObject..node[itemId.indexOf(movieclipId)].node_revisions_body;
-				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:1, onComplete:function():void { Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:1 } ) }} );
+				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:0.1, onComplete:function():void { Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:5 } ) }} );
+				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1, onComplete:function():void { Tweener.addTween(TextField(mediabox.undertitle), { alpha:1, time:5 } ) }} );
 				TextField(mediabox.titlename).htmlText = "<b>"+ movieclipIdArray[itemId.indexOf(movieclipId)]+"<b>";
 				TextField(mediabox.undertitle).text = dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_subtitle;	
 			}
@@ -244,7 +248,8 @@ package core
 			MovieClip(mediabox.textitem2).visible = false;
 			MovieClip(mediabox.textitem3).visible = false;
 			MovieClip(mediabox.preloader).visible = false;
-			Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:1} );
+			Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:5 } );
+			Tweener.addTween(TextField(mediabox.undertitle), { alpha:1, time:5} );
 			TextField(mediabox.titlename).htmlText = "<b>"+ movieclipIdArray[itemId.indexOf(movieclipId)] + "</b>";
 			TextField(mediabox.undertitle).text = dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_subtitle;
 			TextField(mediabox.msgarea.messagecontainer).visible = true;
@@ -269,12 +274,12 @@ package core
 		 * */
 		private function latestItemsloaded(e:Event):void
 		{
-			trace(latestXmlloader.getXML(movieclipId));
+			
 			if (latestXmlloader.getXML(movieclipId) == "") {
 				
 				onTypeError();
 				
-			}else{
+			}else {
 			latestXmlIdArray.push(movieclipId);
 
 			MovieClip(mediabox.preloader).visible = false;
@@ -282,7 +287,15 @@ package core
 			latestXmlobjArray.push(latestXmlloader.getXML(movieclipId));
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
-			setLatestText();
+			if (latestXmlObject..node.length() == 0) {
+				onTypeError();
+			}else {
+				setLatestText();
+			}
+			
+				
+			
+			
 			}
 		
 	
@@ -298,21 +311,59 @@ package core
 			MovieClip(mediabox.textitem3).visible = true;
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
-			Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:1} );
-
-				TextField(mediabox.titlename).htmlText = "<b>"+ movieclipIdArray[itemId.indexOf(movieclipId)] + "</b>";
-				TextField(mediabox.undertitle).text = dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_subtitle;
-				mediabox.setTextitem0(latestXmlObject..node[0].node_title, setTextDate(0), latestXmlObject..node[0].node_type);
-				mediabox.setTextitem1(latestXmlObject..node[1].node_title, setTextDate(1), latestXmlObject..node[1].node_type);
-				mediabox.setTextitem2(latestXmlObject..node[2].node_title, setTextDate(2), latestXmlObject..node[2].node_type);
+			
+			Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:5 } );
+			Tweener.addTween(TextField(mediabox.undertitle), { alpha:1, time:5 } );
+			/** Test to see if all 3 nodes are loaded
+			 * 
+			 */
+			if (latestXmlObject..node.length() == 1) {
+				
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1("", "", "");
+				mediabox.setTextitem2("", "", "");
+				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 2) {
+				
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2("", "", "");
+				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 3) {
+				
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
 				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
 				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
 				MovieClip(mediabox.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+			}
+			
+			
+
+				TextField(mediabox.titlename).htmlText = "<b>"+ movieclipIdArray[itemId.indexOf(movieclipId)] + "</b>";
+				TextField(mediabox.undertitle).htmlText = dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_subtitle;
+				
+				
+				
 		
 				
 
 			
 			
+		}
+		private function checkForText(text:String):String
+		{
+			var testString:String = text;
+			if (testString == "" || testString == null) {
+				testString = "";
+				return testString;
+			}else {
+				return testString;
+			}
 		}
 			private function textitem1clickhandler(e:MouseEvent):void
 		{
