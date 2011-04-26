@@ -19,6 +19,7 @@ package components.Hoverbox_beta2
 		private var mcLatestpost:MovieClip;
 		private var mcGetroom:MovieClip;
 		private var textformat:TextFormat;
+		private var textformatTitle:TextFormat;
 		private var tf:TextFormat;
 		private var movieclipId:String;
 		private var xmlObject:XML;
@@ -40,6 +41,11 @@ package components.Hoverbox_beta2
 			textformat.color = 0x823F0A;
 			textformat.size = 9;
 			
+			textformatTitle = new TextFormat();
+			textformatTitle.font = "Verdana";
+			textformatTitle.color = 0x000000;
+			textformatTitle.size = 9;
+			
 			tf = new TextFormat();
 			tf.color = 0xE48515;
 			
@@ -49,7 +55,7 @@ package components.Hoverbox_beta2
 			mcGetroom = mc_room;
 			
 			latestpost.selectable = false;
-			latestpost.autoSize = TextFieldAutoSize.LEFT;
+			latestpost.autoSize = TextFieldAutoSize.CENTER;
 			latestpost.defaultTextFormat = textformat;
 			mcLatestpost.buttonMode = true;
 			mcLatestpost.useHandCursor = true;
@@ -60,14 +66,14 @@ package components.Hoverbox_beta2
 			
 			
 			getRoom.selectable = false;
-			getRoom.autoSize = TextFieldAutoSize.LEFT;
-			getRoom.defaultTextFormat = textformat;
+			getRoom.autoSize = TextFieldAutoSize.CENTER;
+			getRoom.defaultTextFormat = textformatTitle;
 			mcGetroom.buttonMode = true;
 			mcGetroom.useHandCursor = true;
 			mcGetroom.mouseChildren = false;
-			mcGetroom.addEventListener(MouseEvent.CLICK, roomClickHandler);
-			mcGetroom.addEventListener(MouseEvent.MOUSE_OVER, roommouseoverHandler);
-			mcGetroom.addEventListener(MouseEvent.MOUSE_OUT, roommouseoutHandler);
+			//mcGetroom.addEventListener(MouseEvent.CLICK, roomClickHandler);
+			//mcGetroom.addEventListener(MouseEvent.MOUSE_OVER, roommouseoverHandler);
+			//mcGetroom.addEventListener(MouseEvent.MOUSE_OUT, roommouseoutHandler);
 		}
 		private function latestClickHandler (e:MouseEvent):void
 		{
@@ -82,22 +88,22 @@ package components.Hoverbox_beta2
 		private function roommouseoverHandler(e:MouseEvent):void
 		{
 			
-			MovieClip(arrow_upper).gotoAndStop(1);
+			
 			getRoom.setTextFormat(tf);
 		}
 		private function roommouseoutHandler(e:MouseEvent):void
 		{
-			MovieClip(arrow_upper).gotoAndStop(2);
+			
 			getRoom.setTextFormat(textformat);
 		}
 		private function latestmouseoverHandler(e:MouseEvent):void
 		{
-			MovieClip(arrow_lower).gotoAndStop(1);
+			
 			latestpost.setTextFormat(tf);
 		}
 		private function latestmouseoutHandler(e:MouseEvent):void
 		{
-			MovieClip(arrow_lower).gotoAndStop(2);
+			
 			latestpost.setTextFormat(textformat);
 		}
 		//public function to set the id of the hoverbox

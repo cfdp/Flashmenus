@@ -18,6 +18,8 @@
 	import flash.net.URLRequest;
 	import com.google.analytics.AnalyticsTracker;
 	import com.google.analytics.GATracker;
+	import flash.display.SimpleButton;
+	import flash.external.ExternalInterface;
 	
 
 	
@@ -50,7 +52,7 @@
 		private var defaultxml:XML;
 		private var movieclipArray:Array;
 		private var tracker:AnalyticsTracker;
-		import flash.external.ExternalInterface;
+		
 
 
 		//contstructor 
@@ -67,20 +69,48 @@
 			addChild(mediaobj);
 			//mediaobj.preloader.bar.scaleX = 0;
 			//mediaobj.preloader._txt.visible = false;
+			MovieClip(mediaobj.textitem1).visible = false;
+			MovieClip(mediaobj.textitem2).visible = false;
+			MovieClip(mediaobj.textitem3).visible = false;
+			
+			/** Feedback button
+			 * */
+			SimpleButton(feedback).addEventListener(MouseEvent.CLICK, feedbackClickHandler);
+			
+			
 
 			
 		}
 		//loading the base xml for the menu
 		private function loadxml():void
 		{
-			//for offline testing/debugging in a lokal environment set test varibel to true
+			/**for offline testing/debugging in a lokal environment set test varibel to true
+			 * You can use the following numbers for testing on startxml and defaultxml, to test
+			 * Against online content.
+			 * 
+			 * !! WHEN TESTING THE FRONTPAGE PASS ANOTHER NUMBER THEN 1196 ON THE DEFAULTXML STRING !!
+			 * 
+			 * forsiden: 		1196  movieclip frame name "frontpage"
+			 * Nueh:     		1003  movieclip frame name "nueh"
+			 * Lovstuen:  	 	 275  movieclip frame name "lov"
+			 * Badeværlse: 	 	 274  movieclip frame name "bade"
+			 * Lystværelse:	 	 276  movieclip frame name "lyst"
+			 * stue:		 	 272  movieclip frame name "stue"
+			 * Bibliotek:	 	 278  movieclip frame name "Bib"
+			 * Mediehulen:	 	 283  movieclip frame name "Medie"
+			 * Kunstværksted:	 281  movieclip frame name "Kunst"
+			 * */
 			var test:Boolean = true;
 			if (test)
 			{
-				baseurl = "";
-				var startxml:String = "room.xml";
-				var defaultxml:String = "default.xml";
+				baseurl = "http://www.cyberhus.dk/";
+				var startxml:String = "fmitems/281";
+				var defaultxml:String = "fmblandet/281";
+				MovieClip(rum).gotoAndStop("kunst");
+				
+				
 			}else {
+				MovieClip(rum).visible = false;
 				baseurl = ExternalInterface.call("baseurl");
 				startxml = ExternalInterface.call("startxml");
 				defaultxml = ExternalInterface.call("defaultxml");
@@ -97,7 +127,7 @@
 			basexmlloader.addEventListener(BulkLoader.ERROR, onError);
 			basexmlloader.start();
 
-			//trace(buildingSiteText.length());
+			
 		}
 		/*when the base xml is loaded start to load roomxml files from basexml
 		 * it loops through the basexml file and adds all the roomxml files to
@@ -136,20 +166,36 @@
 		private function allRoomItemsLoaded(e:Event):void
 		{
 			MovieClip(mediaobj.preloader).visible = false;
+			MovieClip(mediaobj.textitem1).visible = true;
+			MovieClip(mediaobj.textitem2).visible = true;
+			MovieClip(mediaobj.textitem3).visible = true;
 			movieclipArray = new Array();
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
 				movieclipArray.push(roomxmlloader.getMovieClip("roomswf" + i));
+
 				
 			}
-			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj);
+			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj,tracker);
 			addChild(placeFmswf);
-			mediaobj.titlename.text = "Ungeblogs";
-			mediaobj.undertitle.text = "Sundhed og velvære";
+			TextField(mediaobj.titlename).htmlText = changeTitle(basexml..node[1].term_data_name);
+			TextField(mediaobj.undertitle).htmlText = "Seneste nyheder";
+			
 			
 			
 
 		}
+		/** Test to the title string.
+		 * */
+		private function changeTitle (str:String):String
+		{
+			if (str == "Forsiden") {
+				return "Velkommen til Cyberhus";
+			}else {
+				return basexml..node[1].term_data_name;
+			}
+		}
+		
 		/*passses the progress information to the mediabox so the user can follow and see the progress*/
 		private function allRoomProgress(e:BulkProgressEvent):void
 		{
@@ -183,15 +229,22 @@
 		}
 		private function textitem1clickhandler(e:MouseEvent):void
 		{
-			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[0].nid),"_self");
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[0].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[0].term_data_name + defaultxml..node[0].node_title);
+			
 		}
 		private function textitem2clickhandler(e:MouseEvent):void
 		{
-			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[1].nid),"_self");
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[1].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[1].term_data_name + defaultxml..node[1].node_title);
 		}
 		private function textitem3clickhandler(e:MouseEvent):void
 		{
-			navigateToURL(new URLRequest(baseurl +"node/"+ defaultxml..node[2].nid),"_self");
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[2].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[2].term_data_name + defaultxml..node[2].node_title);
 		}
 		private function setTextDate(num:int):String
 		{
@@ -209,8 +262,10 @@
 				
 				var newdate:Date = new Date();
 				newdate.setTime(unixtime * 1000);
-				var textdate:String = newdate.getDate() + "." + "0" + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
+				
+				var textdate:String = newdate.getDate() + "." + (newdate.getMonth() + 1) + "." + newdate.getFullYear();
 				return textdate;
+				
 	
 			}
 			
@@ -225,7 +280,13 @@
 		{
 			return basexml..node.length();
 		}
-		
-	}
+		/** Feedback button
+		 * 	sends the user the the url when the button is clicked
+		 * */
+		private function feedbackClickHandler(e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest("http://www.cyberhus.dk/node/11936"),"_self");
+		}
+		}
 
 }

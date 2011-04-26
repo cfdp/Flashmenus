@@ -63,13 +63,13 @@ package components
 		//mouse over and out functions for the text object that makes another color in the dot and sets the textformat.
 		private function mouseoverTextitem(e:MouseEvent):void
 		{
-			dot.gotoAndStop(2);
+			
 			_headline.setTextFormat(headlineTextformat);
 			
 		}
 		private function mouseoutTextitem(e:MouseEvent):void
 		{
-			dot.gotoAndStop(1);
+			
 			_headline.setTextFormat(tf);
 		}
 		

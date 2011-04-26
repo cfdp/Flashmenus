@@ -41,7 +41,7 @@ package components.Mediabox_beta2
 		{
 			tf = new TextFormat();
 			tf.bold = true;
-			tf.size = 12;
+			tf.size = 11;
 			tf.font = "Verdana";
 			tf.color = 0x000000;
 			
@@ -116,7 +116,7 @@ package components.Mediabox_beta2
 			}else{
 				itembox2.headline.htmlText = "<b>" + headline + "</b>";
 			}
-			itembox2.type.htmlText = " "+testString(type);
+			itembox2.type.htmlText = testString(type);
 			itembox2.date.htmlText = date;
 		}
 		public function setTextitem2(headline:String,date:String,type:String):void
@@ -131,7 +131,7 @@ package components.Mediabox_beta2
 			}else{
 				itembox3.headline.htmlText = "<b>" + headline + "</b>";
 			}
-			itembox3.type.htmlText = " "+testString(type);
+			itembox3.type.htmlText = testString(type);
 			itembox3.date.htmlText = date;
 		}
 
