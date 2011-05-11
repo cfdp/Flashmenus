@@ -24,6 +24,13 @@ package components.Mediabox_beta2
 		private var itembox1:MovieClip;
 		private var itembox2:MovieClip;
 		private var itembox3:MovieClip;
+		private var itembox4:MovieClip;
+		private var itembox5:MovieClip;
+		private var itembox6:MovieClip;
+		private var itembox7:MovieClip;
+		private var itembox8:MovieClip;
+		private var itembox9:MovieClip;
+		private var itembox10:MovieClip;
 		private var titletext:TextField;
 		private var ungeblog:MovieClip;
 		private var starway:MovieClip;
@@ -52,13 +59,27 @@ package components.Mediabox_beta2
 			
 
 			//tell the compiler they are movieclips
-			itembox1 = textitem1;
-			itembox2 = textitem2;
-			itembox3 = textitem3;
+			itembox1 = sc.content.textitem1;
+			itembox2 = sc.content.textitem2;
+			itembox3 = sc.content.textitem3;
+			itembox4 = sc.content.textitem4;
+			itembox5 = sc.content.textitem5;
+			itembox6 = sc.content.textitem6;
+			itembox7 = sc.content.textitem7;
+			itembox8 = sc.content.textitem8;
+			itembox9 = sc.content.textitem9;
+			itembox10 = sc.content.textitem10;
 			
 			itembox1.addEventListener(MouseEvent.CLICK, mouseclickItembox);
 			itembox2.addEventListener(MouseEvent.CLICK, mouseclickItembox);
 			itembox3.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox4.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox5.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox6.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox7.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox8.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox9.addEventListener(MouseEvent.CLICK, mouseclickItembox);
+			itembox10.addEventListener(MouseEvent.CLICK, mouseclickItembox);
 			
 			
 
@@ -91,6 +112,7 @@ package components.Mediabox_beta2
 		//functions for setting up text for the item text fields.
 		public function setTextitem0(headline:String,date:String,type:String):void
 		{
+			trace("run settextitem1");
 			itembox1.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 			if (itembox1.headline.textWidth > 173)
 			{
@@ -107,6 +129,7 @@ package components.Mediabox_beta2
 		}
 		public function setTextitem1(headline:String,date:String,type:String):void
 		{
+			trace("run settextitem2");
 			itembox2.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 						if (itembox2.headline.textWidth > 173)
 			{
@@ -121,6 +144,7 @@ package components.Mediabox_beta2
 		}
 		public function setTextitem2(headline:String,date:String,type:String):void
 		{
+			trace("run settextitem3");
 
 			itembox3.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
 						if (itembox3.headline.textWidth > 173)
@@ -133,6 +157,118 @@ package components.Mediabox_beta2
 			}
 			itembox3.type.htmlText = checkForText(testString(type));
 			itembox3.date.htmlText = checkForText(date);
+		}
+		public function setTextitem3(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem3");
+
+			itembox4.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox4.headline.textWidth > 173)
+			{
+				
+				itembox4.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox4.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox4.type.htmlText = checkForText(testString(type));
+			itembox4.date.htmlText = checkForText(date);
+		}
+		public function setTextitem4(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem4");
+
+			itembox5.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox5.headline.textWidth > 173)
+			{
+				
+				itembox5.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox5.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox5.type.htmlText = checkForText(testString(type));
+			itembox5.date.htmlText = checkForText(date);
+		}
+		public function setTextitem5(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem5");
+
+			itembox6.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox6.headline.textWidth > 173)
+			{
+				
+				itembox6.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox6.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox6.type.htmlText = checkForText(testString(type));
+			itembox6.date.htmlText = checkForText(date);
+		}
+		public function setTextitem6(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem6");
+
+			itembox7.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox7.headline.textWidth > 173)
+			{
+				
+				itembox7.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox7.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox7.type.htmlText = checkForText(testString(type));
+			itembox7.date.htmlText = checkForText(date);
+		}
+		public function setTextitem7(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem7");
+
+			itembox8.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox8.headline.textWidth > 173)
+			{
+				
+				itembox8.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox8.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox8.type.htmlText = checkForText(testString(type));
+			itembox8.date.htmlText = checkForText(date);
+		}
+		public function setTextitem8(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem8");
+
+			itembox9.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox9.headline.textWidth > 173)
+			{
+				
+				itembox9.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox9.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox9.type.htmlText = checkForText(testString(type));
+			itembox9.date.htmlText = checkForText(date);
+		}
+		public function setTextitem9(headline:String,date:String,type:String):void
+		{
+			trace("run settextitem9");
+
+			itembox10.headline.htmlText = "<b>" + checkForText(headline) + "</b>";
+						if (itembox10.headline.textWidth > 173)
+			{
+				
+				itembox10.headline.replaceText(22, 200, "...");
+				
+			}else{
+				itembox10.headline.htmlText = "<b>" + headline + "</b>";
+			}
+			itembox10.type.htmlText = checkForText(testString(type));
+			itembox10.date.htmlText = checkForText(date);
 		}
 		private function checkForText(text:String):String
 		{

@@ -52,6 +52,7 @@
 		private var defaultxml:XML;
 		private var movieclipArray:Array;
 		private var tracker:AnalyticsTracker;
+		private var feedbackButton:MovieClip;
 		
 
 
@@ -69,9 +70,16 @@
 			addChild(mediaobj);
 			//mediaobj.preloader.bar.scaleX = 0;
 			//mediaobj.preloader._txt.visible = false;
-			MovieClip(mediaobj.textitem1).visible = false;
-			MovieClip(mediaobj.textitem2).visible = false;
-			MovieClip(mediaobj.textitem3).visible = false;
+			MovieClip(mediaobj.sc.content.textitem1).visible = false;
+			MovieClip(mediaobj.sc.content.textitem2).visible = false;
+			MovieClip(mediaobj.sc.content.textitem3).visible = false;
+			MovieClip(mediaobj.sc.content.textitem4).visible = false;
+			MovieClip(mediaobj.sc.sb).visible = false;
+			feedbackButton = MovieClip(fb);
+			feedbackButton.buttonMode = true;
+			feedbackButton.useHandCursor = true;
+			feedbackButton.visible = false;
+			
 			
 			
 			
@@ -101,9 +109,9 @@
 			var test:Boolean = false;
 			if (test)
 			{
-				baseurl = "http://www.reneskou.me/";
-				var startxml:String = "fmitems";
-				var defaultxml:String = "fmblandet";
+				baseurl = "http://www.cyberhus.dk/";
+				var startxml:String = "fmitems/281";
+				var defaultxml:String = "fmblandet/281";
 				
 				
 				
@@ -153,9 +161,20 @@
 		/*Handles error events if the xml is not loaded*/
 		private function onError (e:ErrorEvent):void
 		{
-			MovieClip(mediaobj.textitem1).visible = false;
-			MovieClip(mediaobj.textitem2).visible = false;
-			MovieClip(mediaobj.textitem3).visible = false;
+			
+				MovieClip(mediaobj.sc.content.textitem1).visible = false;
+				MovieClip(mediaobj.sc.content.textitem2).visible = false;
+				MovieClip(mediaobj.sc.content.textitem3).visible = false;
+				MovieClip(mediaobj.sc.content.textitem4).visible = false;
+				MovieClip(mediaobj.sc.content.textitem5).visible = false;
+				MovieClip(mediaobj.sc.content.textitem6).visible = false;
+				MovieClip(mediaobj.sc.content.textitem7).visible = false;
+				MovieClip(mediaobj.sc.content.textitem8).visible = false;
+				MovieClip(mediaobj.sc.content.textitem9).visible = false;
+				MovieClip(mediaobj.sc.content.textitem10).visible = false;
+				
+			
+			
 			TextField(mediaobj.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 		/*fires when ALL items are loaded
@@ -164,9 +183,23 @@
 		private function allRoomItemsLoaded(e:Event):void
 		{
 			MovieClip(mediaobj.preloader).visible = false;
-			MovieClip(mediaobj.textitem1).visible = true;
-			MovieClip(mediaobj.textitem2).visible = true;
-			MovieClip(mediaobj.textitem3).visible = true;
+			MovieClip(mediaobj.sc.sb).visible = true;
+			MovieClip(mediaobj.sc.content.textitem1).visible = true;
+			MovieClip(mediaobj.sc.content.textitem2).visible = true;
+			MovieClip(mediaobj.sc.content.textitem3).visible = true;
+			MovieClip(mediaobj.sc.content.textitem4).visible = true;
+			MovieClip(mediaobj.sc.content.textitem5).visible = true;
+			MovieClip(mediaobj.sc.content.textitem6).visible = true;
+			MovieClip(mediaobj.sc.content.textitem7).visible = true;
+			MovieClip(mediaobj.sc.content.textitem8).visible = true;
+			MovieClip(mediaobj.sc.content.textitem9).visible = true;
+			MovieClip(mediaobj.sc.content.textitem10).visible = true;
+			feedbackButton.visible = true;
+			feedbackButton.addEventListener(MouseEvent.MOUSE_OVER, feedbackOver);
+			feedbackButton.addEventListener(MouseEvent.MOUSE_OUT, feedbackOut);
+			feedbackButton.addEventListener(MouseEvent.CLICK, feedbackClick);
+			
+	
 			movieclipArray = new Array();
 			for (var i:Number = 0; i < countXmlItems; i++)
 			{
@@ -177,7 +210,8 @@
 			var placeFmswf:Fmswf = new Fmswf(basexml, baseurl, movieclipArray,mediaobj,tracker);
 			addChild(placeFmswf);
 			TextField(mediaobj.titlename).htmlText = "<b>" + changeTitle(basexml..node[1].term_data_name) + "</b>";
-			TextField(mediaobj.undertitle).htmlText = "Seneste nyheder";
+			TextField(mediaobj.undertitle).htmlText = "Seneste indlæg";
+			
 			
 			
 			
@@ -214,14 +248,31 @@
 		 * */
 		private function setupMediaText():void
 		{
+			trace("run setupmediatext");
 			
 
 			mediaobj.setTextitem0(defaultxml..node[0].node_title, setTextDate(0), defaultxml..node[0].node_type);
 			mediaobj.setTextitem1(defaultxml..node[1].node_title, setTextDate(1), defaultxml..node[1].node_type);
 			mediaobj.setTextitem2(defaultxml..node[2].node_title, setTextDate(2), defaultxml..node[2].node_type);
-			MovieClip(mediaobj.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
-			MovieClip(mediaobj.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
-			MovieClip(mediaobj.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+			mediaobj.setTextitem3(defaultxml..node[3].node_title, setTextDate(3), defaultxml..node[3].node_type);
+			mediaobj.setTextitem4(defaultxml..node[4].node_title, setTextDate(4), defaultxml..node[4].node_type);
+			mediaobj.setTextitem5(defaultxml..node[5].node_title, setTextDate(5), defaultxml..node[5].node_type);
+			mediaobj.setTextitem6(defaultxml..node[6].node_title, setTextDate(6), defaultxml..node[6].node_type);
+			mediaobj.setTextitem7(defaultxml..node[7].node_title, setTextDate(7), defaultxml..node[7].node_type);
+			mediaobj.setTextitem8(defaultxml..node[8].node_title, setTextDate(8), defaultxml..node[8].node_type);
+			mediaobj.setTextitem9(defaultxml..node[9].node_title, setTextDate(9), defaultxml..node[9].node_type);
+			
+			MovieClip(mediaobj.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+			MovieClip(mediaobj.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+			MovieClip(mediaobj.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+			MovieClip(mediaobj.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+			MovieClip(mediaobj.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+			MovieClip(mediaobj.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+			MovieClip(mediaobj.sc.content.textitem7).addEventListener(MouseEvent.CLICK, textitem7clickhandler);
+			MovieClip(mediaobj.sc.content.textitem8).addEventListener(MouseEvent.CLICK, textitem8clickhandler);
+			MovieClip(mediaobj.sc.content.textitem9).addEventListener(MouseEvent.CLICK, textitem9clickhandler);
+			MovieClip(mediaobj.sc.content.textitem10).addEventListener(MouseEvent.CLICK, textitem10clickhandler);
+			
 			
 
 		}
@@ -244,6 +295,64 @@
 			//Google tracker object.
 			tracker.trackPageview("mediabox/" + defaultxml..node[2].term_data_name + defaultxml..node[2].node_title);
 		}
+		
+		private function textitem4clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 3;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem5clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 4;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem6clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 5;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem7clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 6;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem8clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 7;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem9clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 8;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		private function textitem10clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 9;
+			navigateToURL(new URLRequest(baseurl +"node/" + defaultxml..node[id].nid), "_self");
+			//Gooogle tracker object.
+			tracker.trackPageview("mediabox/" + defaultxml..node[id].term_data_name + defaultxml..node[id].node_title);
+			
+		}
+		
 		private function setTextDate(num:int):String
 		{
 			
@@ -267,6 +376,18 @@
 	
 			}
 			
+		}
+		private function feedbackOver (e:MouseEvent):void
+		{
+			feedbackButton.gotoAndStop("hover");
+		}
+		private function feedbackOut (e:MouseEvent):void
+		{
+			feedbackButton.gotoAndStop("normal");
+		}
+		private function feedbackClick (e:MouseEvent):void
+		{
+			navigateToURL(new URLRequest(baseurl +"node/" + "11936"), "_self");
 		}
 
 		

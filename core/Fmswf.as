@@ -98,7 +98,7 @@ package core
 				addChild(fmswfContainer);
 				MovieClip(movieclipArray[i]).addEventListener(MouseEvent.MOUSE_OVER, fmswfContainerMouseOver);
 				fmswfContainer.addEventListener(MouseEvent.CLICK, containerClickHandler);
-				if (mediabox.hitTestObject(fmswfContainer))
+				if (mediabox.mBoundery.hitTestObject(fmswfContainer))
 				{
 					var num:Number = 424;
 					Tweener.addTween(mediabox, { x:num, time:3 } );
@@ -106,6 +106,7 @@ package core
 			
 				
 				}
+				trace(mediabox.hitTestObject(fmswfContainer));
 			}
 
 			
@@ -172,6 +173,7 @@ package core
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
 
 			MovieClip(mediabox.preloader).visible = true;
+			MovieClip(mediabox.sc.sb.thumb).y = 0;
 			
 			mediacontenturl = baseurl + dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_text;
 			
@@ -188,7 +190,8 @@ package core
 				TextField(mediabox.msgarea.messagecontainer).visible = false;
 				MovieClip(mediabox.preloader).visible = false;
 				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:0.1 } );
-				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1} );
+				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1 } );
+				MovieClip(mediabox.sc.sb).visible = true;
 				setLatestText();
 
 			}else if (dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_text != undefined) 
@@ -202,10 +205,18 @@ package core
 				latestXmlloader.addEventListener(BulkLoader.ERROR, onError);
 				latestXmlloader.start();
 				TextField(mediabox.msgarea.messagecontainer).visible = false;
-				MovieClip(mediabox.textitem1).visible = false;
-				MovieClip(mediabox.textitem2).visible = false;
-				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem1).visible = false;
+				MovieClip(mediabox.sc.content.textitem2).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
+				MovieClip(mediabox.sc.content.textitem5).visible = false;
+				MovieClip(mediabox.sc.content.textitem6).visible = false;
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
 				MovieClip(mediabox.preloader).visible = true;
+				MovieClip(mediabox.sc.sb).visible = true;
 				Tweener.addTween(TextField(mediabox.titlename), { alpha:0, time:0.1 } );
 				Tweener.addTween(TextField(mediabox.undertitle), { alpha:0, time:0.1} );
 				
@@ -214,10 +225,18 @@ package core
 
 			}else 
 			{
+				MovieClip(mediabox.sc.sb).visible = false;
 				TextField(mediabox.msgarea.messagecontainer).visible = true;
-				MovieClip(mediabox.textitem1).visible = false;
-				MovieClip(mediabox.textitem2).visible = false;
-				MovieClip(mediabox.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem1).visible = false;
+				MovieClip(mediabox.sc.content.textitem2).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
+				MovieClip(mediabox.sc.content.textitem5).visible = false;
+				MovieClip(mediabox.sc.content.textitem6).visible = false;
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
 				MovieClip(mediabox.preloader).visible = false;
 				TextField(mediabox.msgarea.messagecontainer).multiline = true;
 				TextField(mediabox.msgarea.messagecontainer).wordWrap = true;
@@ -237,16 +256,30 @@ package core
 
 		private function onError (e:ErrorEvent):void
 		{
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+				MovieClip(mediabox.sc.content.textitem2).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
+				MovieClip(mediabox.sc.content.textitem5).visible = false;
+				MovieClip(mediabox.sc.content.textitem6).visible = false;
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
 			TextField(mediabox.msgarea.messagecontainer).text = "Ingen data til rådighed";
 		}
 		private function onTypeError():void
 		{
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+				MovieClip(mediabox.sc.content.textitem2).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
+				MovieClip(mediabox.sc.content.textitem5).visible = false;
+				MovieClip(mediabox.sc.content.textitem6).visible = false;
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
 			MovieClip(mediabox.preloader).visible = false;
 			Tweener.addTween(TextField(mediabox.titlename), { alpha:1, time:5 } );
 			Tweener.addTween(TextField(mediabox.undertitle), { alpha:1, time:5} );
@@ -306,9 +339,16 @@ package core
 		{
 			
 			TextField(mediabox.msgarea.messagecontainer).text = "";
-			MovieClip(mediabox.textitem1).visible = true;
-			MovieClip(mediabox.textitem2).visible = true;
-			MovieClip(mediabox.textitem3).visible = true;
+			MovieClip(mediabox.sc.content.textitem1).visible = true;
+				MovieClip(mediabox.sc.content.textitem2).visible = true;
+				MovieClip(mediabox.sc.content.textitem3).visible = true;
+				MovieClip(mediabox.sc.content.textitem4).visible = true;
+				MovieClip(mediabox.sc.content.textitem5).visible = true;
+				MovieClip(mediabox.sc.content.textitem6).visible = true;
+				MovieClip(mediabox.sc.content.textitem7).visible = true;
+				MovieClip(mediabox.sc.content.textitem8).visible = true;
+				MovieClip(mediabox.sc.content.textitem9).visible = true;
+				MovieClip(mediabox.sc.content.textitem10).visible = true;
 			//Setting the varible to the xml object
 			latestXmlObject = latestXmlobjArray[latestXmlIdArray.indexOf(movieclipId)];
 			
@@ -318,28 +358,205 @@ package core
 			 * 
 			 */
 			if (latestXmlObject..node.length() == 1) {
-				
+				MovieClip(mediabox.sc.sb).visible = false;
+				MovieClip(mediabox.sc.content.textitem2).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
 				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
 				mediabox.setTextitem1("", "", "");
 				mediabox.setTextitem2("", "", "");
-				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				mediabox.setTextitem3("", "", "");
+				mediabox.setTextitem4("", "", "");
+				mediabox.setTextitem5("", "", "");
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
 				
 			}else if (latestXmlObject..node.length() == 2) {
-				
+				MovieClip(mediabox.sc.sb).visible = false;
+				MovieClip(mediabox.sc.content.textitem3).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
 				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
 				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
 				mediabox.setTextitem2("", "", "");
-				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
-				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				mediabox.setTextitem3("", "", "");
+				mediabox.setTextitem4("", "", "");
+				mediabox.setTextitem5("", "", "");
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
 				
 			}else if (latestXmlObject..node.length() == 3) {
-				
+				MovieClip(mediabox.sc.sb).visible = false;
+				MovieClip(mediabox.sc.content.textitem4).visible = false;
 				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
 				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
 				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
-				MovieClip(mediabox.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
-				MovieClip(mediabox.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
-				MovieClip(mediabox.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				mediabox.setTextitem3("", "", "");
+				mediabox.setTextitem4("", "", "");
+				mediabox.setTextitem5("", "", "");
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+			}else if (latestXmlObject..node.length() == 4) {
+				MovieClip(mediabox.sc.sb).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4("", "", "");
+				mediabox.setTextitem5("", "", "");
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediaboxsc.content..textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 5) {
+				MovieClip(mediabox.sc.content.textitem6).visible = false;
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5("", "", "");
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 6) {
+				MovieClip(mediabox.sc.content.textitem7).visible = false;
+				MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5(checkForText(latestXmlObject..node[5].node_title), checkForText(setTextDate(5)), checkForText(latestXmlObject..node[5].node_type));
+				mediabox.setTextitem6("", "", "");
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				MovieClip(mediabox.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 7) {
+					MovieClip(mediabox.sc.content.textitem8).visible = false;
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5(checkForText(latestXmlObject..node[5].node_title), checkForText(setTextDate(5)), checkForText(latestXmlObject..node[5].node_type));
+				mediabox.setTextitem6(checkForText(latestXmlObject..node[6].node_title), checkForText(setTextDate(6)), checkForText(latestXmlObject..node[6].node_type));
+				mediabox.setTextitem7("", "", "");
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				MovieClip(mediabox.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+				MovieClip(mediabox.sc.content.textitem7).addEventListener(MouseEvent.CLICK, textitem7clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 8) {
+				MovieClip(mediabox.sc.content.textitem9).visible = false;
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5(checkForText(latestXmlObject..node[5].node_title), checkForText(setTextDate(5)), checkForText(latestXmlObject..node[5].node_type));
+				mediabox.setTextitem6(checkForText(latestXmlObject..node[6].node_title), checkForText(setTextDate(6)), checkForText(latestXmlObject..node[6].node_type));
+				mediabox.setTextitem7(checkForText(latestXmlObject..node[7].node_title), checkForText(setTextDate(7)), checkForText(latestXmlObject..node[7].node_type));
+				mediabox.setTextitem8("", "", "");
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				MovieClip(mediabox.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+				MovieClip(mediabox.sc.content.textitem7).addEventListener(MouseEvent.CLICK, textitem7clickhandler);
+				MovieClip(mediabox.sc.content.textitem8).addEventListener(MouseEvent.CLICK, textitem8clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 9) {
+				MovieClip(mediabox.sc.content.textitem10).visible = false;
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5(checkForText(latestXmlObject..node[5].node_title), checkForText(setTextDate(5)), checkForText(latestXmlObject..node[5].node_type));
+				mediabox.setTextitem6(checkForText(latestXmlObject..node[6].node_title), checkForText(setTextDate(6)), checkForText(latestXmlObject..node[6].node_type));
+				mediabox.setTextitem7(checkForText(latestXmlObject..node[7].node_title), checkForText(setTextDate(7)), checkForText(latestXmlObject..node[7].node_type));
+				mediabox.setTextitem8(checkForText(latestXmlObject..node[8].node_title), checkForText(setTextDate(8)), checkForText(latestXmlObject..node[8].node_type));
+				mediabox.setTextitem9("", "", "");
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				MovieClip(mediabox.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+				MovieClip(mediabox.sc.content.textitem7).addEventListener(MouseEvent.CLICK, textitem7clickhandler);
+				MovieClip(mediabox.sc.content.textitem8).addEventListener(MouseEvent.CLICK, textitem8clickhandler);
+				MovieClip(mediabox.sc.content.textitem9).addEventListener(MouseEvent.CLICK, textitem9clickhandler);
+				
+			}else if (latestXmlObject..node.length() == 10) {
+				mediabox.setTextitem0(checkForText(latestXmlObject..node[0].node_title), checkForText(setTextDate(0)), checkForText(latestXmlObject..node[0].node_type));
+				mediabox.setTextitem1(checkForText(latestXmlObject..node[1].node_title), checkForText(setTextDate(1)), checkForText(latestXmlObject..node[1].node_type));
+				mediabox.setTextitem2(checkForText(latestXmlObject..node[2].node_title), checkForText(setTextDate(2)), checkForText(latestXmlObject..node[2].node_type));
+				mediabox.setTextitem3(checkForText(latestXmlObject..node[3].node_title), checkForText(setTextDate(3)), checkForText(latestXmlObject..node[3].node_type));
+				mediabox.setTextitem4(checkForText(latestXmlObject..node[4].node_title), checkForText(setTextDate(4)), checkForText(latestXmlObject..node[4].node_type));
+				mediabox.setTextitem5(checkForText(latestXmlObject..node[5].node_title), checkForText(setTextDate(5)), checkForText(latestXmlObject..node[5].node_type));
+				mediabox.setTextitem6(checkForText(latestXmlObject..node[6].node_title), checkForText(setTextDate(6)), checkForText(latestXmlObject..node[6].node_type));
+				mediabox.setTextitem7(checkForText(latestXmlObject..node[7].node_title), checkForText(setTextDate(7)), checkForText(latestXmlObject..node[7].node_type));
+				mediabox.setTextitem8(checkForText(latestXmlObject..node[8].node_title), checkForText(setTextDate(8)), checkForText(latestXmlObject..node[8].node_type));
+				mediabox.setTextitem9(checkForText(latestXmlObject..node[9].node_title), checkForText(setTextDate(9)), checkForText(latestXmlObject..node[9].node_type));
+				MovieClip(mediabox.sc.content.textitem1).addEventListener(MouseEvent.CLICK, textitem1clickhandler);
+				MovieClip(mediabox.sc.content.textitem2).addEventListener(MouseEvent.CLICK, textitem2clickhandler);
+				MovieClip(mediabox.sc.content.textitem3).addEventListener(MouseEvent.CLICK, textitem3clickhandler);
+				MovieClip(mediabox.sc.content.textitem4).addEventListener(MouseEvent.CLICK, textitem4clickhandler);
+				MovieClip(mediabox.sc.content.textitem5).addEventListener(MouseEvent.CLICK, textitem5clickhandler);
+				MovieClip(mediabox.sc.content.textitem6).addEventListener(MouseEvent.CLICK, textitem6clickhandler);
+				MovieClip(mediabox.sc.content.textitem7).addEventListener(MouseEvent.CLICK, textitem7clickhandler);
+				MovieClip(mediabox.sc.content.textitem8).addEventListener(MouseEvent.CLICK, textitem8clickhandler);
+				MovieClip(mediabox.sc.content.textitem9).addEventListener(MouseEvent.CLICK, textitem9clickhandler);
+				MovieClip(mediabox.sc.content.textitem10).addEventListener(MouseEvent.CLICK, textitem10clickhandler);
+			}else if (latestXmlObject..node.length() < 1) {
+				onTypeError();
 			}
 			
 			
@@ -368,34 +585,189 @@ package core
 			private function textitem1clickhandler(e:MouseEvent):void
 		{
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
 			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[0].nid), "_self");
-			tracker.trackPageview("mediabox/" + dataObject..node[0].term_data_name + dataObject..node[0].node_title);
+			tracker.trackPageview("mediabox/" + dataObject..node[0].term_data_name+"/" + dataObject..node[0].node_title);
 		}
 		private function textitem2clickhandler(e:MouseEvent):void
 		{
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
 			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[1].nid), "_self");
-			tracker.trackPageview("mediabox/" + dataObject..node[0].term_data_name + dataObject..node[0].node_title);
+			tracker.trackPageview("mediabox/" + dataObject..node[1].term_data_name +"/"+ dataObject..node[1].node_title);
 		}
 		private function textitem3clickhandler(e:MouseEvent):void
 		{
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
 			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[2].nid), "_self");
 			//Google tracker object.
-			tracker.trackPageview("mediabox/" + dataObject..node[0].term_data_name + dataObject..node[0].node_title);
+			tracker.trackPageview("mediabox/" + dataObject..node[2].term_data_name +"/"+ dataObject..node[2].node_title);
 		}
+		private function textitem4clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 3;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		private function textitem5clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 4;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		private function textitem6clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 5;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		private function textitem7clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 6;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		private function textitem8clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 7;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		private function textitem9clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 8;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+			private function textitem10clickhandler(e:MouseEvent):void
+		{
+			var id:Number = 9;
+			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
+			MovieClip(mediabox.preloader).visible = true;
+			navigateToURL(new URLRequest(baseurl +"node/" + latestXmlObject..node[id].nid), "_self");
+			//Google tracker object.
+			tracker.trackPageview("mediabox/" + dataObject..node[id].term_data_name +"/"+ dataObject..node[id].node_title);
+		}
+		
 		/*Function to convert the unixtime stamp into a date object*/
 		private function setTextDate(num:int):String
 		{
@@ -409,9 +781,16 @@ package core
 		private function containerClickHandler(e:MouseEvent):void
 		{
 			MovieClip(mediabox.preloader.bar).gotoAndPlay(1);
-			MovieClip(mediabox.textitem1).visible = false;
-			MovieClip(mediabox.textitem2).visible = false;
-			MovieClip(mediabox.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem1).visible = false;
+			MovieClip(mediabox.sc.content.textitem2).visible = false;
+			MovieClip(mediabox.sc.content.textitem3).visible = false;
+			MovieClip(mediabox.sc.content.textitem4).visible = false;
+			MovieClip(mediabox.sc.content.textitem5).visible = false;
+			MovieClip(mediabox.sc.content.textitem6).visible = false;
+			MovieClip(mediabox.sc.content.textitem7).visible = false;
+			MovieClip(mediabox.sc.content.textitem8).visible = false;
+			MovieClip(mediabox.sc.content.textitem9).visible = false;
+			MovieClip(mediabox.sc.content.textitem10).visible = false;
 			TextField(mediabox.msgarea.messagecontainer).visible = false;
 			MovieClip(mediabox.preloader).visible = true;
 			navigateToURL(new URLRequest(baseurl + dataObject..node[itemId.indexOf(movieclipId)].node_data_field_anmeldelse_link_paakraevet_field_anmeldelse_link_paakraevet), "_self");
