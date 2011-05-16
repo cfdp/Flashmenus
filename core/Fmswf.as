@@ -174,6 +174,7 @@ package core
 
 			MovieClip(mediabox.preloader).visible = true;
 			MovieClip(mediabox.sc.sb.thumb).y = 0;
+			MovieClip(mediabox.sc.content).y = 0;
 			
 			mediacontenturl = baseurl + dataObject..node[itemId.indexOf(movieclipId)].node_data_field_text_field_text;
 			
