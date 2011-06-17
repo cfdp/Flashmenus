@@ -75,7 +75,11 @@
 			MovieClip(mediaobj.sc.content.textitem3).visible = false;
 			MovieClip(mediaobj.sc.content.textitem4).visible = false;
 			MovieClip(mediaobj.sc.sb).visible = false;
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> ba26100fc250c1ab2df8aa555c0d70a45d997f11
 			
 			
 			
