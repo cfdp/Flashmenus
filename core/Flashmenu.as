@@ -75,10 +75,7 @@
 			MovieClip(mediaobj.sc.content.textitem3).visible = false;
 			MovieClip(mediaobj.sc.content.textitem4).visible = false;
 			MovieClip(mediaobj.sc.sb).visible = false;
-			feedbackButton = MovieClip(fb);
-			feedbackButton.buttonMode = true;
-			feedbackButton.useHandCursor = true;
-			feedbackButton.visible = false;
+			
 			
 			
 			
@@ -194,10 +191,7 @@
 			MovieClip(mediaobj.sc.content.textitem8).visible = true;
 			MovieClip(mediaobj.sc.content.textitem9).visible = true;
 			MovieClip(mediaobj.sc.content.textitem10).visible = true;
-			feedbackButton.visible = true;
-			feedbackButton.addEventListener(MouseEvent.MOUSE_OVER, feedbackOver);
-			feedbackButton.addEventListener(MouseEvent.MOUSE_OUT, feedbackOut);
-			feedbackButton.addEventListener(MouseEvent.CLICK, feedbackClick);
+			
 			
 	
 			movieclipArray = new Array();
@@ -377,18 +371,7 @@
 			}
 			
 		}
-		private function feedbackOver (e:MouseEvent):void
-		{
-			feedbackButton.gotoAndStop("hover");
-		}
-		private function feedbackOut (e:MouseEvent):void
-		{
-			feedbackButton.gotoAndStop("normal");
-		}
-		private function feedbackClick (e:MouseEvent):void
-		{
-			navigateToURL(new URLRequest(baseurl +"node/" + "11936"), "_self");
-		}
+
 
 		
 

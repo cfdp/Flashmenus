@@ -312,6 +312,10 @@ package components.Mediabox_beta2
 				return "Debatten";
 				break;
 				
+				case "historie":
+				return "Livsfortællinger";
+				break;
+				
 				default:
 				return type;
 			}
